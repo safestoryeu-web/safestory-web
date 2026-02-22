@@ -7,27 +7,29 @@ export default function Home() {
     // HLAVNÝ OBAL: Tu sme nastavili tvoj nový obrázok ako pozadie na celú obrazovku
     <main className="relative min-h-screen bg-[url('/images/background.webp')] bg-cover bg-center bg-no-repeat flex flex-col items-center justify-center p-4 font-sans overflow-hidden">
       
-      {/* --- POSTAVA SOFIA (VĽAVO) --- */}
-      <div className="hidden lg:block absolute bottom-0 left-[-2%] w-[42%] h-[85%] z-0 pointer-events-none">
-        <Image 
-          src="/images/sofia_full.webp" 
-          alt="Sofia"
-          fill
-          className="object-contain object-bottom drop-shadow-2xl"
-          priority
-        />
-      </div>
+      {/* SOFIA - postavička vľavo */}
+<div className="absolute bottom-10 left-[-20px] md:left-10 w-40 md:w-80 z-10 transition-all">
+  <Image 
+    src="/images/sofia_full.webp" 
+    alt="Sofia" 
+    width={400} 
+    height={600} 
+    className="object-contain"
+    priority 
+  />
+</div>
 
-      {/* --- POSTAVA OLÍVIA (VPRAVO) --- */}
-      <div className="hidden lg:block absolute bottom-0 right-[-2%] w-[42%] h-[85%] z-0 pointer-events-none">
-        <Image 
-          src="/images/olivia_full.webp" 
-          alt="Olívia"
-          fill
-          className="object-contain object-bottom drop-shadow-2xl"
-          priority
-        />
-      </div>
+{/* OLÍVIA - postavička vpravo */}
+<div className="absolute bottom-10 right-[-20px] md:right-10 w-40 md:w-80 z-10 transition-all">
+  <Image 
+    src="/images/olivia_full.webp" 
+    alt="Olívia" 
+    width={400} 
+    height={600} 
+    className="object-contain"
+    priority 
+  />
+</div>
 
       {/* --- NEVIDITEĽNÝ OBAL PRE TEXT --- */}
       {/* Box je preč! Zostal len text s jemným bielym tieňom pre lepšiu čitateľnosť */}
