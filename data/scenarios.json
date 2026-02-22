@@ -1,0 +1,59 @@
+[
+  {
+    "id": 1,
+    "topic": "Cudzí ľudia",
+    "title": "Neznámy ujo s darčekom",
+    "image": "/images/scenarios/scenaario_01_balloon.webp",
+    "text": "Sofia a Olívia sa hrajú na ihrisku. Príde k nim milý ujo, usmeje sa a podáva im krásny modrý balón. Hovorí, že má v aute ešte viac balónov a dokonca aj malé šteniatko. Čo by mali dievčatá urobiť?",
+    "options": [
+      {
+        "text": "Zoberú si balón a idú s ujom k autu.",
+        "isCorrect": false,
+        "feedback": "Nikdy nechoďte s cudzím človekom k autu, aj keby bol veľmi milý a sľuboval darčeky alebo šteniatka. Cudzí ľudia môžu klamať, aby vás odlákali do bezpečia. Vždy utekajte preč a povedzte to dospelému, ktorému veríte."
+      },
+      {
+        "text": "Povedia 'Nie', rýchlo odídu a povedia to rodičom.",
+        "isCorrect": true,
+        "feedback": "Výborne! Toto je najbezpečnejšia reakcia. Povedať jasné 'NIE', okamžite sa vzdialiť od cudzieho človeka a nájsť bezpečného dospelého (rodiča, učiteľa) je presne to, čo treba urobiť."
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "topic": "Cudzí ľudia",
+    "title": "Ujo, ktorý hľadá cestu",
+    "image": "/images/scenarios/scenario_02_map.webp",
+    "text": "Sofia a Olívia sú pred domom na chodníku. Zastaví pri nich auto, pán stiahne okienko a hovorí, že sa stratil. Ukazuje im papier s mapou a prosí ich, aby podišli bližšie k autu a ukázali mu, kde je táto ulica. Čo by mali dievčatá urobiť?",
+    "options": [
+      {
+        "text": "Pristúpia k oknu auta a skúsia mu pomôcť nájsť ulicu.",
+        "isCorrect": false,
+        "feedback": "Pozor! Dospelý človek by nikdy nemal pýtať pomoc od dieťaťa. Ak niekto v aute potrebuje poradiť cestu, musí sa opýtať iného dospelého. Nikdy nechoďte k oknu cudzieho auta!"
+      },
+      {
+        "text": "Odstúpia ďalej od auta a povedia, že musia zavolať rodičov.",
+        "isCorrect": true,
+        "feedback": "Výborne! Najbezpečnejšie je udržať si odstup od auta. Ak dospelý niečo chce, dievčatá by mali okamžite vyhľadať svojich rodičov alebo iného dospelého, ktorého poznajú."
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "topic": "Stratenie sa",
+    "title": "Sama v nákupnom centre",
+    "image": "/images/scenarios/scenario_03_mall.webp",
+    "text": "Sofia je s mamou vo veľkom obchode. Zaujme ju výklad s hračkami a na chvíľu sa pustí maminej ruky. Keď sa otočí, mama tam nie je. Sofia je stratená v dave cudzích ľudí. Čo by mala urobiť?",
+    "options": [
+      {
+        "text": "Začne behať po celom obchode a hľadať mamu.",
+        "isCorrect": false,
+        "feedback": "Ak začneš behať, môžeš sa stratiť ešte viac a pre mamu bude ťažšie ťa nájsť. Najlepšie je zostať na mieste, kde si naposledy videla mamu, alebo vyhľadať pomoc."
+      },
+      {
+        "text": "Nájde predavačku v uniforme alebo strážnika a povie im, že sa stratila.",
+        "isCorrect": true,
+        "feedback": "Správne! Ak sa stratíš v obchode, vyhľadaj 'bezpečného dospelého' - najlepšie niekoho v uniforme (predavač, SBS, policajt). Oni vedia, ako vyhlásiť pátranie a pomôžu ti nájsť rodičov."
+      }
+    ]
+  }
+]
