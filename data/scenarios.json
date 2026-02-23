@@ -150,5 +150,24 @@
         "feedback": "Správne! S cudzím človekom nikdy nikam nechoď, aj keď pôsobí milo. Najlepšie je zostať tam, kde si, a poriadne nahlas volať o pomoc."
       }
     ]
+  },
+  {
+    "id": 9,
+    "topic": "Moje pocity",
+    "title": "Nepríjemné šeptanie",
+    "image": "/images/scenarios/scenario_09_secret.webp",
+    "text": "Niekto cudzí príde k Olívii a pošepká jej do uška niečo, z čoho sa Olívia začne cítiť smutne a trošku sa bojí. Ten človek povie: 'Nikomu to neprezraď, je to naše tajomstvo.' Čo by mala Olívia urobiť?",
+    "options": [
+      {
+        "text": "Nič nikomu nepovie, pretože sľúbila, že to bude tajomstvo.",
+        "isCorrect": false,
+        "feedback": "Pozor! Ak ti niekto povie niečo, z čoho si smutný/á alebo sa bojíš, nie je to dobré tajomstvo. Takéto veci sa nesmú tajiť."
+      },
+      {
+        "text": "Hneď povie mamičke alebo ockovi, že jej niekto povedal niečo smutné.",
+        "isCorrect": true,
+        "feedback": "Správne! Ak máš z niečoho zlý pocit v brušku, vždy to povedz dospelému, ktorému veríš. Mamka a ocko ti vždy pomôžu."
+      }
+    ]
   }
 ]

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import scenarios from '../../data/scenarios.json';
@@ -17,6 +17,7 @@ export default function PlayPage() {
   const [speakingSource, setSpeakingSource] = useState<'scenario' | 'option' | 'feedback' | 'final' | null>(null);
   const [speakingOptionIndex, setSpeakingOptionIndex] = useState<number | null>(null);
   const [scenarioOrder, setScenarioOrder] = useState<number[]>([]);
+  const audioContextRef = useRef<AudioContext | null>(null);
 
   const totalScenarios = scenarios.length;
   const effectiveIndex =
@@ -67,6 +68,50 @@ export default function PlayPage() {
     setSpeakingSource(null);
     setSpeakingOptionIndex(null);
   }, [currentIndex]);
+
+  const playTone = (frequency: number, duration: number, type: OscillatorType = "sine", startTimeOffset = 0) => {
+    if (typeof window === "undefined") return;
+
+    const AudioContextClass =
+      (window as any).AudioContext || (window as any).webkitAudioContext;
+    if (!AudioContextClass) return;
+
+    if (!audioContextRef.current || audioContextRef.current.state === "closed") {
+      audioContextRef.current = new AudioContextClass();
+    }
+
+    const ctx = audioContextRef.current;
+    if (!ctx) return;
+
+    const oscillator = ctx.createOscillator();
+    const gainNode = ctx.createGain();
+
+    oscillator.type = type;
+    oscillator.frequency.setValueAtTime(frequency, ctx.currentTime + startTimeOffset);
+
+    gainNode.gain.setValueAtTime(0.18, ctx.currentTime + startTimeOffset);
+    gainNode.gain.exponentialRampToValueAtTime(
+      0.001,
+      ctx.currentTime + startTimeOffset + duration
+    );
+
+    oscillator.connect(gainNode);
+    gainNode.connect(ctx.destination);
+
+    oscillator.start(ctx.currentTime + startTimeOffset);
+    oscillator.stop(ctx.currentTime + startTimeOffset + duration);
+  };
+
+  const playCorrectSound = () => {
+    // Jemné "cink" – krátky vyšší tón
+    playTone(1200, 0.18, "triangle");
+  };
+
+  const playWrongSound = () => {
+    // Jemné "tudu" – dva krátke klesajúce tóny
+    playTone(500, 0.16, "square");
+    playTone(350, 0.18, "square", 0.16);
+  };
 
   const getPreferredVoice = () => {
     if (!voices.length) return undefined;
@@ -298,6 +343,16 @@ export default function PlayPage() {
 
   const handleOptionClick = (index: number) => {
     if (showFeedback) return;
+
+    const option = currentScenario.options[index];
+    if (option) {
+      if (option.isCorrect) {
+        playCorrectSound();
+      } else {
+        playWrongSound();
+      }
+    }
+
     setSelectedOption(index);
     setShowFeedback(true);
   };
@@ -336,6 +391,12 @@ export default function PlayPage() {
     }
     setScenarioOrder(indices);
   };
+
+  // Bezpečnostná poistka – ak by sa z nejakého dôvodu nenašiel scenár (napr. po hot-reloade),
+  // nerenderujeme nič a vyhneme sa pádu aplikácie.
+  if (!currentScenario) {
+    return null;
+  }
 
   return (
     <main className="min-h-screen bg-[url('/images/background.webp')] bg-cover bg-center bg-fixed flex flex-col items-center justify-center py-8 px-4 font-sans text-slate-900">
