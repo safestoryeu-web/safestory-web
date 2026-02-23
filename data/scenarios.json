@@ -55,5 +55,62 @@
         "feedback": "Správne! Ak sa stratíš v obchode, vyhľadaj 'bezpečného dospelého' - najlepšie niekoho ako predavačku, SBS, policajata. Pomôžu ti nájsť rodičov."
       }
     ]
+  },
+  {
+    "id": 4,
+    "topic": "Zvieratká",
+    "title": "Stratený psík",
+    "image": "/images/scenarios/scenario_04_dog.webp",
+    "text": "Sofia a Olívia uvidia v parku krásneho psíka s huňatým chvostom. Behá úplne sám a vyzerá veľmi smutne. Olívia ho chce ísť hneď pohladkať a vziať si ho domov. Čo by mali dievčatá urobiť?",
+    "options": [
+      {
+        "text": "Hneď k nemu utekajú a začnú ho hladkať, aby mu nebolo smutno.",
+        "isCorrect": false,
+        "feedback": "Pozor! Aj ten najmilší psík sa môže zľaknúť cudzieho človeka a v strachu ťa pohrýzť. Nikdy nesiahaj na psíka bez majiteľa."
+      },
+      {
+        "text": "Psíka sa nedotýkajú a idú nájsť dospelého, ktorého poznajú, aby mu o psíkovi povedali.",
+        "isCorrect": true,
+        "feedback": "Správne! Ak uvidíš psíka samého, najbezpečnejšie je nedotýkať sa ho a zavolať pomoc dospelého, ktorý zistí, komu psík patrí."
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "topic": "Bezpečnosť domova",
+    "title": "Niekto zvoní pri dverách",
+    "image": "/images/scenarios/scenario_05_door.webp",
+    "text": "Sofia a Olívia sú samy v izbe a zrazu niekto zazvoní. Pozrú sa cez priezor a uvidia uja v uniforme, ktorý hovorí: 'Mám pre mamku balík, otvor mi, prosím, nech ti ho môžem podať.' Čo by mali urobiť?",
+    "options": [
+      {
+        "text": "Otvoria dvere a balík od uja prevezmú, aby pomohli mamke.",
+        "isCorrect": false,
+        "feedback": "Nikdy neotváraj dvere nikomu, koho nepoznáš, aj keď má uniformu alebo ti nesie darček. Je to nebezpečné."
+      },
+      {
+        "text": "Dvere neotvoria a cez zatvorené dvere povedia, aby ujo nechal balík pred dverami alebo prišiel neskôr.",
+        "isCorrect": true,
+        "feedback": "Správne! Dvere musia zostať zamknuté. Bezpečný dospelý pochopí, že dieťa nemôže otvárať, a balík nechá u susedov alebo pred dverami."
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "topic": "Bezpečnosť doma",
+    "title": "Farebné guľôčky",
+    "image": "/images/scenarios/scenario_06_pills.webp",
+    "text": "Sofia nájde na stole v kuchyni otvorenú krabičku s farebnými guľôčkami. Vyzerajú presne ako jej obľúbené cukríky a má na ne veľkú chuť. Čo by mala urobiť?",
+    "options": [
+      {
+        "text": "Ochutná jednu guľôčku, aby zistila, či je to naozaj cukrík.",
+        "isCorrect": false,
+        "feedback": "Pozor! Nikdy nejedz nič, čo nájdeš v krabičke alebo fľaštičke, aj keď to vyzerá ako sladkosť. Môžu to byť lieky, z ktorých by ťa veľmi bolel bruško."
+      },
+      {
+        "text": "Nič si nevezme a ide sa opýtať dospelého, čo je v tej krabičke.",
+        "isCorrect": true,
+        "feedback": "Správne! Len dospelý vie, čo je v krabičke bezpečné. Vždy sa radšej opýtaj, než niečo ochutnáš."
+      }
+    ]
   }
 ]
