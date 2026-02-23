@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import scenarios from '../../data/scenarios.json';
@@ -10,8 +10,168 @@ export default function PlayPage() {
   const [selectedOption, setSelectedOption] = useState<number | null>(null);
   const [showFeedback, setShowFeedback] = useState(false);
   const [isFinished, setIsFinished] = useState(false); // Nový stav pre koniec hry
+  const [speechSupported, setSpeechSupported] = useState(false);
+  const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
+  const [isSpeaking, setIsSpeaking] = useState(false);
+  const [speakingSource, setSpeakingSource] = useState<'scenario' | 'option' | null>(null);
+  const [speakingOptionIndex, setSpeakingOptionIndex] = useState<number | null>(null);
 
   const currentScenario = scenarios[currentIndex];
+
+  // Inicializácia Speech Synthesis a zoznamu hlasov
+  useEffect(() => {
+    if (typeof window === 'undefined' || !('speechSynthesis' in window)) return;
+
+    const synth = window.speechSynthesis;
+    setSpeechSupported(true);
+
+    const loadVoices = () => {
+      const loadedVoices = synth.getVoices();
+      if (loadedVoices.length > 0) {
+        setVoices(loadedVoices);
+      }
+    };
+
+    loadVoices();
+    synth.onvoiceschanged = loadVoices;
+
+    return () => {
+      synth.onvoiceschanged = null;
+      synth.cancel();
+    };
+  }, []);
+
+  // Pri zmene scenára zrušíme prípadné prebiehajúce čítanie
+  useEffect(() => {
+    if (typeof window === 'undefined' || !('speechSynthesis' in window)) return;
+    window.speechSynthesis.cancel();
+    setIsSpeaking(false);
+    setSpeakingSource(null);
+    setSpeakingOptionIndex(null);
+  }, [currentIndex]);
+
+  const getPreferredVoice = () => {
+    if (!voices.length) return undefined;
+
+    // Pôvodný jednoduchší výber – preferujeme SK/CZ alebo ženské meno
+    const preferredVoices = voices.filter((voice) => {
+      const name = voice.name.toLowerCase();
+      const lang = (voice.lang || '').toLowerCase();
+      const isSkOrCz = lang.startsWith('sk') || lang.startsWith('cs');
+      const soundsFemale =
+        name.includes('female') ||
+        name.includes('woman') ||
+        name.includes('zuzana') ||
+        name.includes('eva') ||
+        name.includes('jana');
+
+      return isSkOrCz || soundsFemale;
+    });
+
+    return preferredVoices[0] || voices[0];
+  };
+
+  const speakCurrentScenario = () => {
+    if (!speechSupported || typeof window === 'undefined' || !('speechSynthesis' in window)) return;
+
+    const synth = window.speechSynthesis;
+    synth.cancel();
+
+    const utterance = new SpeechSynthesisUtterance(
+      `${currentScenario.title}. ${currentScenario.text}`
+    );
+
+    const voiceToUse = getPreferredVoice();
+    if (voiceToUse) {
+      utterance.voice = voiceToUse;
+    }
+
+    utterance.rate = 0.98;
+    utterance.pitch = 1.05;
+
+    utterance.onstart = () => {
+      setIsSpeaking(true);
+      setSpeakingSource('scenario');
+      setSpeakingOptionIndex(null);
+    };
+    utterance.onend = () => {
+      setIsSpeaking(false);
+      setSpeakingSource(null);
+      setSpeakingOptionIndex(null);
+    };
+    utterance.onerror = () => {
+      setIsSpeaking(false);
+      setSpeakingSource(null);
+      setSpeakingOptionIndex(null);
+    };
+
+    synth.speak(utterance);
+  };
+
+  const speakOption = (index: number, text: string) => {
+    if (!speechSupported || typeof window === 'undefined' || !('speechSynthesis' in window)) return;
+
+    const synth = window.speechSynthesis;
+    synth.cancel();
+
+    const utterance = new SpeechSynthesisUtterance(text);
+
+    const voiceToUse = getPreferredVoice();
+    if (voiceToUse) {
+      utterance.voice = voiceToUse;
+    }
+
+    utterance.rate = 1;
+    utterance.pitch = 1.05;
+
+    utterance.onstart = () => {
+      setIsSpeaking(true);
+      setSpeakingSource('option');
+      setSpeakingOptionIndex(index);
+    };
+    utterance.onend = () => {
+      setIsSpeaking(false);
+      setSpeakingSource(null);
+      setSpeakingOptionIndex(null);
+    };
+    utterance.onerror = () => {
+      setIsSpeaking(false);
+      setSpeakingSource(null);
+      setSpeakingOptionIndex(null);
+    };
+
+    synth.speak(utterance);
+  };
+
+  const handleToggleSpeak = () => {
+    if (!speechSupported || typeof window === 'undefined' || !('speechSynthesis' in window)) return;
+
+    const synth = window.speechSynthesis;
+
+    if (isSpeaking && speakingSource === 'scenario') {
+      synth.cancel();
+      setIsSpeaking(false);
+      setSpeakingSource(null);
+      setSpeakingOptionIndex(null);
+    } else {
+      speakCurrentScenario();
+    }
+  };
+
+  const handleToggleOptionSpeak = (index: number, text: string) => {
+    if (!speechSupported || typeof window === 'undefined' || !('speechSynthesis' in window)) return;
+
+    const synth = window.speechSynthesis;
+
+    if (isSpeaking && speakingSource === 'option' && speakingOptionIndex === index) {
+      synth.cancel();
+      setIsSpeaking(false);
+      setSpeakingSource(null);
+      setSpeakingOptionIndex(null);
+    } else {
+      speakOption(index, text);
+    }
+  };
 
   const handleOptionClick = (index: number) => {
     if (showFeedback) return;
@@ -108,9 +268,26 @@ export default function PlayPage() {
               <div className="text-sm font-bold text-teal-600 uppercase tracking-widest mb-3 mt-4 md:mt-0">
                 Téma: {currentScenario.topic} | Scenár {currentIndex + 1} z {scenarios.length}
               </div>
-              <h1 className="text-3xl md:text-4xl font-extrabold text-slate-800 mb-6">
-                {currentScenario.title}
-              </h1>
+
+              <div className="flex items-start justify-between gap-3 mb-6">
+                <h1 className="text-3xl md:text-4xl font-extrabold text-slate-800">
+                  {currentScenario.title}
+                </h1>
+                {speechSupported && (
+                  <button
+                    type="button"
+                    onClick={handleToggleSpeak}
+                    className="shrink-0 w-11 h-11 md:w-12 md:h-12 rounded-full border-2 border-teal-500 bg-white/70 text-teal-700 flex items-center justify-center shadow-sm hover:bg-teal-500 hover:text-white transition-colors"
+                    aria-label={
+                      isSpeaking && speakingSource === 'scenario'
+                        ? 'Zastaviť čítanie scenára'
+                        : 'Prehrať scenár nahlas'
+                    }
+                  >
+                    {isSpeaking && speakingSource === 'scenario' ? '⏹' : '🔊'}
+                  </button>
+                )}
+              </div>
               <p className="text-lg md:text-xl text-slate-700 mb-10 leading-relaxed font-medium">
                 {currentScenario.text}
               </p>
@@ -123,15 +300,34 @@ export default function PlayPage() {
                     else if (selectedOption === index) buttonStyle = "border-red-500 bg-red-100 text-red-800";
                     else buttonStyle = "border-white/50 bg-white/30 text-slate-500 opacity-50";
                   }
+                  const isOptionSpeaking =
+                    isSpeaking &&
+                    speakingSource === 'option' &&
+                    speakingOptionIndex === index;
                   return (
-                    <button 
-                      key={index}
-                      onClick={() => handleOptionClick(index)}
-                      disabled={showFeedback}
-                      className={`w-full text-left p-5 md:p-6 rounded-2xl border-2 transition-all text-lg font-medium shadow-sm ${buttonStyle}`}
-                    >
-                      {option.text}
-                    </button>
+                    <div key={index} className="flex items-stretch gap-3">
+                      <button 
+                        onClick={() => handleOptionClick(index)}
+                        disabled={showFeedback}
+                        className={`flex-1 text-left p-5 md:p-6 rounded-2xl border-2 transition-all text-lg font-medium shadow-sm ${buttonStyle}`}
+                      >
+                        {option.text}
+                      </button>
+                      {speechSupported && !showFeedback && (
+                        <button
+                          type="button"
+                          onClick={() => handleToggleOptionSpeak(index, option.text)}
+                          className="shrink-0 w-11 h-11 md:w-12 md:h-12 rounded-full border-2 border-teal-500 bg-white/70 text-teal-700 flex items-center justify-center shadow-sm hover:bg-teal-500 hover:text-white transition-colors"
+                          aria-label={
+                            isOptionSpeaking
+                              ? 'Zastaviť čítanie odpovede'
+                              : 'Prehrať odpoveď nahlas'
+                          }
+                        >
+                          {isOptionSpeaking ? '⏹' : '🔊'}
+                        </button>
+                      )}
+                    </div>
                   );
                 })}
               </div>
