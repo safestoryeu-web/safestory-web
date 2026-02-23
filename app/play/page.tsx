@@ -88,20 +88,20 @@ export default function PlayPage() {
                ></div>
             </div>
 
-{/* Obal pre obrázok, ktorý sa prispôsobí */}
-<div className="w-full bg-white/20 rounded-2xl overflow-hidden shadow-sm">
-  {/* Tento div drží pomer strán 16:9 na mobile a 1:1 na PC */}
-  <div className="relative w-full aspect-square md:aspect-square">
-    <Image
-      src={currentScenario.image}
-      alt={currentScenario.title}
-      fill
-      sizes="(max-width: 768px) 100vw, 50vw"
-      className="object-contain p-2"
-      priority
-    />
-  </div>
-</div>
+            {/* Ľavý blok s obrázkom – výraznejší a vyšší */}
+            <div className="w-full md:w-5/12 bg-white/20 overflow-hidden shadow-sm flex">
+              {/* Na mobile je obrázok o niečo vyšší, na väčších obrazovkách vypĺňa celú výšku bloku */}
+              <div className="relative w-full aspect-[4/3] md:h-full md:aspect-auto">
+                <Image
+                  src={currentScenario.image}
+                  alt={currentScenario.title}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 40vw"
+                  className="object-contain object-top md:object-cover"
+                  priority
+                />
+              </div>
+            </div>
 
             <div className="w-full md:w-7/12 p-8 md:p-12 flex flex-col justify-center">
               <div className="text-sm font-bold text-teal-600 uppercase tracking-widest mb-3 mt-4 md:mt-0">
