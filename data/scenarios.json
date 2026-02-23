@@ -131,5 +131,24 @@
         "feedback": "Správne! Ak nájdeš niečo ostré alebo divné, nikdy na to nesiahaj. Povedz to dospelému, on to bezpečne uprace."
       }
     ]
+  },
+  {
+    "id": 8,
+    "topic": "Bezpečnosť vonku",
+    "title": "Neznáma teta v parku",
+    "image": "/images/scenarios/scenario_08_password.webp",
+    "text": "Olívia sa na chvíľu vzdialila od mamky v parku. Príde k nej neznáma teta a hovorí: 'Ahoj Olívia, tvoja mamka ma poslala, aby som ťa vzala za ňou k autu. Poď so mnou!' Čo by mala Olívia urobiť?",
+    "options": [
+      {
+        "text": "Uverí tete a pôjde s ňou k autu, aby bola čo najskôr pri mamke.",
+        "isCorrect": false,
+        "feedback": "Pozor! Nikdy neodchádzaj s niekým, koho nepoznáš, aj keď povie, že ho poslala mamka. Cudzia osoba ťa nikdy nesmie nikam brať."
+      },
+      {
+        "text": "S tetou nikam nejde, zostane na mieste a začne hlasno kričať na mamičku.",
+        "isCorrect": true,
+        "feedback": "Správne! S cudzím človekom nikdy nikam nechoď, aj keď pôsobí milo. Najlepšie je zostať tam, kde si, a poriadne nahlas volať o pomoc."
+      }
+    ]
   }
 ]

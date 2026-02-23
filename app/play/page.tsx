@@ -16,17 +16,13 @@ export default function PlayPage() {
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [speakingSource, setSpeakingSource] = useState<'scenario' | 'option' | 'feedback' | 'final' | null>(null);
   const [speakingOptionIndex, setSpeakingOptionIndex] = useState<number | null>(null);
-  const [scenarioOrder, setScenarioOrder] = useState<number[]>(() => {
-    const indices = scenarios.map((_, i) => i);
-    for (let i = indices.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [indices[i], indices[j]] = [indices[j], indices[i]];
-    }
-    return indices;
-  });
+  const [scenarioOrder, setScenarioOrder] = useState<number[]>([]);
 
   const totalScenarios = scenarios.length;
-  const effectiveIndex = scenarioOrder[currentIndex] ?? 0;
+  const effectiveIndex =
+    scenarioOrder.length > 0 && currentIndex < scenarioOrder.length
+      ? scenarioOrder[currentIndex]
+      : currentIndex;
   const currentScenario = scenarios[effectiveIndex];
   const isSuccess = correctCount > totalScenarios / 2;
 
@@ -51,6 +47,16 @@ export default function PlayPage() {
       synth.onvoiceschanged = null;
       synth.cancel();
     };
+  }, []);
+
+  // Nastavíme náhodné poradie scenárov len na klientovi po načítaní
+  useEffect(() => {
+    const indices = scenarios.map((_, i) => i);
+    for (let i = indices.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [indices[i], indices[j]] = [indices[j], indices[i]];
+    }
+    setScenarioOrder(indices);
   }, []);
 
   // Pri zmene scenára zrušíme prípadné prebiehajúce čítanie
