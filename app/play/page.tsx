@@ -88,17 +88,20 @@ export default function PlayPage() {
                ></div>
             </div>
 
-            <div className="relative w-full h-80 md:w-5/12 md:h-auto">
-              {currentScenario.image && (
-                <Image 
-                  src={currentScenario.image}
-                  alt={currentScenario.title}
-                  fill
-                  className="object-cover"
-                  priority
-                />
-              )}
-            </div>
+{/* Obal pre obrázok, ktorý sa prispôsobí */}
+<div className="w-full bg-white/20 rounded-2xl overflow-hidden shadow-sm">
+  {/* Tento div drží pomer strán 16:9 na mobile a 1:1 na PC */}
+  <div className="relative w-full aspect-square md:aspect-square">
+    <Image
+      src={currentScenario.image}
+      alt={currentScenario.title}
+      fill
+      sizes="(max-width: 768px) 100vw, 50vw"
+      className="object-contain p-2"
+      priority
+    />
+  </div>
+</div>
 
             <div className="w-full md:w-7/12 p-8 md:p-12 flex flex-col justify-center">
               <div className="text-sm font-bold text-teal-600 uppercase tracking-widest mb-3 mt-4 md:mt-0">
