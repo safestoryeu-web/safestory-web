@@ -91,13 +91,14 @@ export default function PlayPage() {
             {/* Ľavý blok s obrázkom – výraznejší a vyšší */}
             <div className="w-full md:w-5/12 bg-white/20 overflow-hidden shadow-sm flex">
               {/* Na mobile je obrázok o niečo vyšší, na väčších obrazovkách vypĺňa celú výšku bloku */}
-              <div className="relative w-full aspect-[4/3] md:h-full md:aspect-auto">
+              <div className="relative w-full aspect-[4/5] md:h-full md:aspect-auto">
                 <Image
                   src={currentScenario.image}
                   alt={currentScenario.title}
                   fill
                   sizes="(max-width: 768px) 100vw, 40vw"
-                  className="object-contain object-top md:object-cover"
+                  className="object-cover md:object-cover"
+                  style={{ objectPosition: '50% 75%' }}
                   priority
                 />
               </div>
