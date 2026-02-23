@@ -41,7 +41,7 @@ export default function Home() {
         
         <p className="text-2xl text-slate-800 mb-10 leading-relaxed font-bold drop-shadow-[0_2px_4px_rgba(255,255,255,0.9)] max-w-lg">
           Vitajte vo svete bezpečných dobrodružstiev! Sofia a Olívia sú pripravené. 
-          Aktuálne máme v databáze pripravených <strong className="text-sky-700">{scenarios.length} testovacích scenárov</strong>.
+          Aktuálne máme v databáze pripravených <strong className="text-sky-700">{scenarios.length} scenárov</strong>.
         </p>
         
         <Link href="/play" className="inline-block bg-sky-500 hover:bg-sky-600 text-white font-bold py-4 px-12 rounded-full text-2xl transition-all shadow-[0_8px_30px_rgb(14,165,233,0.4)] hover:shadow-[0_8px_30px_rgb(14,165,233,0.6)] transform hover:-translate-y-1">

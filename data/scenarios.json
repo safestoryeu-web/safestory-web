@@ -169,5 +169,24 @@
         "feedback": "Správne! Ak máš z niečoho zlý pocit v brušku, vždy to povedz dospelému, ktorému veríš. Mamka a ocko ti vždy pomôžu."
       }
     ]
+  },
+  {
+    "id": 10,
+    "topic": "Pomoc druhým",
+    "title": "Kamarátka v úzkych",
+    "image": "/images/scenarios/scenario_10_help.webp",
+    "text": "Sofia a Olívia sa hrajú na preliezke. Olívia sa zrazu pošmykne, nevie zliezť dolu a začne sa báť. Sofia je pri nej, ale nevie ju sama bezpečne chytiť. Čo by mala Sofia urobiť?",
+    "options": [
+      {
+        "text": "Snaží sa Olíviu nasilu potiahnuť dolu sama, aj keď je to vysoko.",
+        "isCorrect": false,
+        "feedback": "Pozor! Ak by si ju ťahala sama, mohli by ste spadnúť obe. Vždy je lepšie zavolať niekoho silnejšieho."
+      },
+      {
+        "text": "Zostane pri Olívii, upokojuje ju a nahlas volá dospelého, aby im pomohol.",
+        "isCorrect": true,
+        "feedback": "Správne! Najlepšia pomoc je zavolať dospelého. Tým, že si pri kamarátke a voláš o pomoc, si skutočná hrdinka."
+      }
+    ]
   }
 ]
