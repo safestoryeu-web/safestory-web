@@ -31,8 +31,6 @@ export default function Home() {
   />
 </div>
 
-      {/* --- NEVIDITEĽNÝ OBAL PRE TEXT --- */}
-      {/* Box je preč! Zostal len text s jemným bielym tieňom pre lepšiu čitateľnosť */}
       <div className="relative z-10 max-w-2xl w-full text-center p-4 flex flex-col items-center">
         
         <h1 className="text-6xl md:text-7xl font-extrabold text-sky-900 mb-6 tracking-tight drop-shadow-[0_2px_4px_rgba(255,255,255,0.9)]">
@@ -44,9 +42,21 @@ export default function Home() {
           Aktuálne máme v databáze pripravených <strong className="text-sky-700">{scenarios.length} scenárov</strong>.
         </p>
         
-        <Link href="/play" className="inline-block bg-sky-500 hover:bg-sky-600 text-white font-bold py-4 px-12 rounded-full text-2xl transition-all shadow-[0_8px_30px_rgb(14,165,233,0.4)] hover:shadow-[0_8px_30px_rgb(14,165,233,0.6)] transform hover:-translate-y-1">
-  Začať hrať
-</Link>
+        <Link
+          href="/play"
+          className="inline-block bg-sky-500 hover:bg-sky-600 text-white font-bold py-4 px-12 rounded-full text-2xl transition-all shadow-[0_8px_30px_rgb(14,165,233,0.4)] hover:shadow-[0_8px_30px_rgb(14,165,233,0.6)] transform hover:-translate-y-1"
+        >
+          Začať hrať
+        </Link>
+      </div>
+
+      {/* Jemný copyright / kontakt dole */}
+      <div className="absolute inset-x-0 bottom-3 px-4 z-10">
+        <p className="text-[11px] md:text-xs text-slate-700/80 text-center backdrop-blur-[2px] bg-white/40 rounded-full px-4 py-1 inline-block mx-auto shadow-sm">
+          © 2026 SafeStory.eu. Všetky práva vyhradené. Projekt SafeStory, ilustrácie postáv (Sofia a
+          Olivia) a príbehy sú autorským dielom.{' '}
+          <span className="whitespace-nowrap">Kontakt: safestoryeu@gmail.com</span>
+        </p>
       </div>
 
     </main>
