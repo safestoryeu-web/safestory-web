@@ -207,5 +207,24 @@
         "feedback": "Správne! Ak ti je nejaký kontakt nepríjemný, môžeš ho odmietnuť, aj keď je to známy človek. Vždy počúvaj svoj pocit."
       }
     ]
+  },
+  {
+    "id": 12,
+    "topic": "Bezpečnosť pri vode",
+    "title": "Lopta v bazéne",
+    "image": "/images/scenarios/scenario_12_water.webp",
+    "text": "Olívia uvidí v plaveckom bazéne svoju obľúbenú nafukovaciu loptu. Pláva kúsok od kraja a Olívia si myslí, že na ňu doiahne, ak sa poriadne nakloní. Nikto dospelý ju práve nevidí. Čo by mala Olívia urobiť?",
+    "options": [
+      {
+        "text": "Skúsi sa po loptu opatrne natiahnuť z kraja bazéna, aby ju vytiahla sama.",
+        "isCorrect": false,
+        "feedback": "Pozor! Okolo bazéna býva podlaha mokrá a šmykľavá. Mohla by si do hlbokej vody spadnúť. Nikdy sa nenakláňaj nad bazén, keď si sama."
+      },
+      {
+        "text": "K bazénu vôbec nejde a uteká zavolať dospelého, aby mu o lopte povedala.",
+        "isCorrect": true,
+        "feedback": "Správne! Pri bazéne musíš byť vždy s dospelým. Bezpečnosť je dôležitejšia než hračka vo vode. Počkaj na mamku alebo ocka."
+      }
+    ]
   }
 ]
