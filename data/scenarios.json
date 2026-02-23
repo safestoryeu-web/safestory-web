@@ -50,9 +50,9 @@
         "feedback": "Ak začneš behať, môžeš sa stratiť ešte viac a pre mamu bude ťažšie ťa nájsť. Najlepšie je zostať na mieste, kde si naposledy videla mamu, alebo vyhľadať pomoc."
       },
       {
-        "text": "Nájde predavačku v uniforme alebo strážnika a povie im, že sa stratila.",
+        "text": "Nájde predavačku v obchode alebo strážnika a povie im, že sa stratila.",
         "isCorrect": true,
-        "feedback": "Správne! Ak sa stratíš v obchode, vyhľadaj 'bezpečného dospelého' - najlepšie niekoho v uniforme (predavač, SBS, policajt). Oni vedia, ako vyhlásiť pátranie a pomôžu ti nájsť rodičov."
+        "feedback": "Správne! Ak sa stratíš v obchode, vyhľadaj 'bezpečného dospelého' - najlepšie niekoho ako predavačku, SBS, policajata. Pomôžu ti nájsť rodičov."
       }
     ]
   }
