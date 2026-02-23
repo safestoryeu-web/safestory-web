@@ -10,13 +10,15 @@ export default function PlayPage() {
   const [selectedOption, setSelectedOption] = useState<number | null>(null);
   const [showFeedback, setShowFeedback] = useState(false);
   const [isFinished, setIsFinished] = useState(false); // Nový stav pre koniec hry
+  const [correctCount, setCorrectCount] = useState(0);
   const [speechSupported, setSpeechSupported] = useState(false);
   const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
   const [isSpeaking, setIsSpeaking] = useState(false);
-  const [speakingSource, setSpeakingSource] = useState<'scenario' | 'option' | null>(null);
+  const [speakingSource, setSpeakingSource] = useState<'scenario' | 'option' | 'feedback' | 'final' | null>(null);
   const [speakingOptionIndex, setSpeakingOptionIndex] = useState<number | null>(null);
 
   const currentScenario = scenarios[currentIndex];
+  const totalScenarios = scenarios.length;
 
   // Inicializácia Speech Synthesis a zoznamu hlasov
   useEffect(() => {
@@ -143,6 +145,41 @@ export default function PlayPage() {
     synth.speak(utterance);
   };
 
+  const speakFeedback = (text: string) => {
+    if (!speechSupported || typeof window === 'undefined' || !('speechSynthesis' in window)) return;
+
+    const synth = window.speechSynthesis;
+    synth.cancel();
+
+    const utterance = new SpeechSynthesisUtterance(text);
+
+    const voiceToUse = getPreferredVoice();
+    if (voiceToUse) {
+      utterance.voice = voiceToUse;
+    }
+
+    utterance.rate = 1;
+    utterance.pitch = 1.05;
+
+    utterance.onstart = () => {
+      setIsSpeaking(true);
+      setSpeakingSource('feedback');
+      setSpeakingOptionIndex(null);
+    };
+    utterance.onend = () => {
+      setIsSpeaking(false);
+      setSpeakingSource(null);
+      setSpeakingOptionIndex(null);
+    };
+    utterance.onerror = () => {
+      setIsSpeaking(false);
+      setSpeakingSource(null);
+      setSpeakingOptionIndex(null);
+    };
+
+    synth.speak(utterance);
+  };
+
   const handleToggleSpeak = () => {
     if (!speechSupported || typeof window === 'undefined' || !('speechSynthesis' in window)) return;
 
@@ -173,6 +210,73 @@ export default function PlayPage() {
     }
   };
 
+  const handleToggleFeedbackSpeak = (text: string) => {
+    if (!speechSupported || typeof window === 'undefined' || !('speechSynthesis' in window)) return;
+
+    const synth = window.speechSynthesis;
+
+    if (isSpeaking && speakingSource === 'feedback') {
+      synth.cancel();
+      setIsSpeaking(false);
+      setSpeakingSource(null);
+      setSpeakingOptionIndex(null);
+    } else {
+      speakFeedback(text);
+    }
+  };
+
+  const speakFinalSummary = () => {
+    if (!speechSupported || typeof window === 'undefined' || !('speechSynthesis' in window)) return;
+
+    const synth = window.speechSynthesis;
+    synth.cancel();
+
+    const summaryText = `Úžasná práca! Dokázal si vyriešiť ${correctCount} z ${totalScenarios} dôležitých situácií a teraz vieš, ako sa zachovať bezpečne.`;
+
+    const utterance = new SpeechSynthesisUtterance(summaryText);
+
+    const voiceToUse = getPreferredVoice();
+    if (voiceToUse) {
+      utterance.voice = voiceToUse;
+    }
+
+    utterance.rate = 0.98;
+    utterance.pitch = 1.05;
+
+    utterance.onstart = () => {
+      setIsSpeaking(true);
+      setSpeakingSource('final');
+      setSpeakingOptionIndex(null);
+    };
+    utterance.onend = () => {
+      setIsSpeaking(false);
+      setSpeakingSource(null);
+      setSpeakingOptionIndex(null);
+    };
+    utterance.onerror = () => {
+      setIsSpeaking(false);
+      setSpeakingSource(null);
+      setSpeakingOptionIndex(null);
+    };
+
+    synth.speak(utterance);
+  };
+
+  const handleToggleFinalSpeak = () => {
+    if (!speechSupported || typeof window === 'undefined' || !('speechSynthesis' in window)) return;
+
+    const synth = window.speechSynthesis;
+
+    if (isSpeaking && speakingSource === 'final') {
+      synth.cancel();
+      setIsSpeaking(false);
+      setSpeakingSource(null);
+      setSpeakingOptionIndex(null);
+    } else {
+      speakFinalSummary();
+    }
+  };
+
   const handleOptionClick = (index: number) => {
     if (showFeedback) return;
     setSelectedOption(index);
@@ -180,6 +284,15 @@ export default function PlayPage() {
   };
 
   const handleNextScenario = () => {
+    // Pri prechode ďalej si zapamätáme, či bola aktuálna odpoveď správna
+    if (
+      selectedOption !== null &&
+      currentScenario.options[selectedOption] &&
+      currentScenario.options[selectedOption].isCorrect
+    ) {
+      setCorrectCount((prev) => prev + 1);
+    }
+
     if (currentIndex < scenarios.length - 1) {
       setCurrentIndex(currentIndex + 1);
       setSelectedOption(null);
@@ -194,6 +307,7 @@ export default function PlayPage() {
     setSelectedOption(null);
     setShowFeedback(false);
     setIsFinished(false);
+    setCorrectCount(0);
   };
 
   return (
@@ -213,14 +327,50 @@ export default function PlayPage() {
                 className="object-cover"
               />
             </div>
-            {/* Pravá strana: Text s gratuláciou */}
-            <div className="w-full md:w-1/2 p-12 flex flex-col justify-center items-center text-center">
-              <div className="text-6xl mb-6">🏆</div>
-              <h1 className="text-4xl md:text-5xl font-extrabold text-teal-700 mb-6">
-                Úžasná práca!
-              </h1>
-              <p className="text-xl text-slate-700 mb-10 leading-relaxed font-medium">
-                Sofia a Olívia sú na teba hrdé. Dokázal si vyriešiť všetky dôležité situácie a vieš, ako sa zachovať bezpečne. Teraz si skutočný strážca bezpečnosti!
+            {/* Pravá strana: Text s gratuláciou a hodnotením */}
+            <div className="w-full md:w-1/2 p-10 md:p-12 flex flex-col justify-center items-center text-center">
+              <div className="text-6xl mb-4">🏆</div>
+
+              {/* Hviezdičky za správne odpovede */}
+              <div className="flex items-center justify-center gap-1 mb-4">
+                {Array.from({ length: totalScenarios }).map((_, i) => (
+                  <span
+                    key={i}
+                    className={`text-2xl md:text-3xl ${
+                      i < correctCount ? 'text-yellow-400' : 'text-slate-300'
+                    }`}
+                  >
+                    ★
+                  </span>
+                ))}
+              </div>
+
+              <div className="flex items-center justify-center gap-3 mb-4">
+                <h1 className="text-3xl md:text-4xl font-extrabold text-teal-700">
+                  Úžasná práca!
+                </h1>
+                {speechSupported && (
+                  <button
+                    type="button"
+                    onClick={handleToggleFinalSpeak}
+                    className="shrink-0 w-11 h-11 md:w-12 md:h-12 rounded-full border-2 border-teal-500 bg-white/70 text-teal-700 flex items-center justify-center shadow-sm hover:bg-teal-500 hover:text-white transition-colors"
+                    aria-label={
+                      isSpeaking && speakingSource === 'final'
+                        ? 'Zastaviť čítanie hodnotenia'
+                        : 'Prehrať hodnotenie nahlas'
+                    }
+                  >
+                    {isSpeaking && speakingSource === 'final' ? '⏹' : '🔊'}
+                  </button>
+                )}
+              </div>
+
+              <p className="text-xl text-slate-700 mb-8 leading-relaxed font-medium">
+                Sofia a Olívia sú na teba hrdé. Dokázal si vyriešiť{' '}
+                <span className="font-bold text-teal-700">
+                  {correctCount} z {totalScenarios}
+                </span>{' '}
+                dôležitých situácií a vieš, ako sa zachovať bezpečne.
               </p>
               <div className="flex flex-col gap-4 w-full">
                 <button 
@@ -231,7 +381,7 @@ export default function PlayPage() {
                 </button>
                 <Link 
                   href="/"
-                  className="text-teal-700 hover:text-teal-900 font-bold text-lg mt-4"
+                  className="text-teal-700 hover:text-teal-900 font-bold text-lg mt-2"
                 >
                   Návrat domov
                 </Link>
@@ -340,12 +490,28 @@ export default function PlayPage() {
                   <p className="text-lg text-slate-700 mb-6 font-medium leading-relaxed">
                     {currentScenario.options[selectedOption].feedback}
                   </p>
-                  <button 
-                    onClick={handleNextScenario}
-                    className="bg-teal-500 hover:bg-teal-600 text-white font-bold py-3 px-8 rounded-full text-xl transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5 inline-block w-full md:w-auto"
-                  >
-                    {currentIndex < scenarios.length - 1 ? 'Ďalší scenár ➡️' : 'Ukázať výsledok! 🏁'}
-                  </button>
+                  <div className="flex flex-col md:flex-row gap-3 items-stretch md:items-center">
+                    <button 
+                      onClick={handleNextScenario}
+                      className="bg-teal-500 hover:bg-teal-600 text-white font-bold py-3 px-8 rounded-full text-xl transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5 inline-block w-full md:w-auto"
+                    >
+                      {currentIndex < scenarios.length - 1 ? 'Ďalší scenár ➡️' : 'Ukázať výsledok! 🏁'}
+                    </button>
+                    {speechSupported && (
+                      <button
+                        type="button"
+                        onClick={() => handleToggleFeedbackSpeak(currentScenario.options[selectedOption].feedback)}
+                        className="shrink-0 w-11 h-11 md:w-12 md:h-12 rounded-full border-2 border-teal-500 bg-white/70 text-teal-700 flex items-center justify-center shadow-sm hover:bg-teal-500 hover:text-white transition-colors"
+                        aria-label={
+                          isSpeaking && speakingSource === 'feedback'
+                            ? 'Zastaviť čítanie vysvetlenia'
+                            : 'Prehrať vysvetlenie nahlas'
+                        }
+                      >
+                        {isSpeaking && speakingSource === 'feedback' ? '⏹' : '🔊'}
+                      </button>
+                    )}
+                  </div>
                 </div>
               )}
             </div>
