@@ -112,5 +112,24 @@
         "feedback": "Správne! Len dospelý vie, čo je v krabičke bezpečné. Vždy sa radšej opýtaj, než niečo ochutnáš."
       }
     ]
+  },
+  {
+    "id": 7,
+    "topic": "Bezpečnosť vonku",
+    "title": "Nález v pieskovisku",
+    "image": "/images/scenarios/scenario_07_sandbox.webp",
+    "text": "Sofia a Olívia sa hrajú v pieskovisku a stavajú hrad. Zrazu Sofia v piesku uvidí niečo ostré a lesklé, čo tam niekto nechal. Vyzerá to ako zaujímavá hračka. Čo by mala Sofia urobiť?",
+    "options": [
+      {
+        "text": "Vezme predmet do ruky a ukáže ho Olívii, aby zistili, čo to je.",
+        "isCorrect": false,
+        "feedback": "Pozor! Na ostré alebo neznáme veci (ako striekačky či črepy zo skla) nikdy nesiahaj. Môžeš sa pichnúť a ochorieť."
+      },
+      {
+        "text": "Vôbec sa toho nedotýka a hneď zavolá dospelého, ktorý je s nimi na ihrisku.",
+        "isCorrect": true,
+        "feedback": "Správne! Ak nájdeš niečo ostré alebo divné, nikdy na to nesiahaj. Povedz to dospelému, on to bezpečne uprace."
+      }
+    ]
   }
 ]

@@ -16,9 +16,18 @@ export default function PlayPage() {
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [speakingSource, setSpeakingSource] = useState<'scenario' | 'option' | 'feedback' | 'final' | null>(null);
   const [speakingOptionIndex, setSpeakingOptionIndex] = useState<number | null>(null);
+  const [scenarioOrder, setScenarioOrder] = useState<number[]>(() => {
+    const indices = scenarios.map((_, i) => i);
+    for (let i = indices.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [indices[i], indices[j]] = [indices[j], indices[i]];
+    }
+    return indices;
+  });
 
-  const currentScenario = scenarios[currentIndex];
   const totalScenarios = scenarios.length;
+  const effectiveIndex = scenarioOrder[currentIndex] ?? 0;
+  const currentScenario = scenarios[effectiveIndex];
   const isSuccess = correctCount > totalScenarios / 2;
 
   // Inicializácia Speech Synthesis a zoznamu hlasov
@@ -312,6 +321,14 @@ export default function PlayPage() {
     setShowFeedback(false);
     setIsFinished(false);
     setCorrectCount(0);
+
+    // Vygenerujeme nové náhodné poradie scenárov
+    const indices = scenarios.map((_, i) => i);
+    for (let i = indices.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [indices[i], indices[j]] = [indices[j], indices[i]];
+    }
+    setScenarioOrder(indices);
   };
 
   return (
