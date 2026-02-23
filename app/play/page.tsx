@@ -460,8 +460,7 @@ export default function PlayPage() {
                     <span className="font-bold text-teal-700">
                       {correctCount} z {totalScenarios}
                     </span>{" "}
-                    dôležitých situácií a vieš, ako sa zachovať bezpečne. Teraz si skutočný strážca
-                    bezpečnosti!
+                    dôležitých situácií a vieš, ako sa zachovať bezpečne!
                   </>
                 ) : (
                   <>
