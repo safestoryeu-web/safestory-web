@@ -19,6 +19,7 @@ export default function PlayPage() {
 
   const currentScenario = scenarios[currentIndex];
   const totalScenarios = scenarios.length;
+  const isSuccess = correctCount > totalScenarios / 2;
 
   // Inicializácia Speech Synthesis a zoznamu hlasov
   useEffect(() => {
@@ -231,7 +232,10 @@ export default function PlayPage() {
     const synth = window.speechSynthesis;
     synth.cancel();
 
-    const summaryText = `Úžasná práca! Dokázal si vyriešiť ${correctCount} z ${totalScenarios} dôležitých situácií a teraz vieš, ako sa zachovať bezpečne.`;
+    const successText = `Úžasná práca! Dokázal si vyriešiť ${correctCount} z ${totalScenarios} dôležitých situácií a teraz vieš, ako sa zachovať bezpečne.`;
+    const tryAgainText = `Nevadí, nabudúce to bude lepšie. Teraz si vyriešil ${correctCount} z ${totalScenarios} situácií. Skús to ešte raz a naučíš sa, ako sa zachovať bezpečne.`;
+
+    const summaryText = isSuccess ? successText : tryAgainText;
 
     const utterance = new SpeechSynthesisUtterance(summaryText);
 
@@ -318,18 +322,18 @@ export default function PlayPage() {
         {/* Ak hra skončila, ukážeme Víťaznú obrazovku */}
         {isFinished ? (
           <div className="w-full flex flex-col md:flex-row animate-in fade-in zoom-in duration-500">
-            {/* Ľavá strana: Oslavný obrázok */}
+            {/* Ľavá strana: Oslavný / povzbudzujúci obrázok */}
             <div className="relative w-full h-80 md:w-1/2 md:h-auto">
               <Image 
-                src="/images/scenarios/victory_celebration.webp" 
-                alt="Gratulujeme!"
+                src={isSuccess ? "/images/scenarios/victory_celebration.webp" : "/images/scenarios/try_again.webp"} 
+                alt={isSuccess ? "Gratulujeme!" : "Skús to znova"}
                 fill
                 className="object-cover"
               />
             </div>
             {/* Pravá strana: Text s gratuláciou a hodnotením */}
             <div className="w-full md:w-1/2 p-10 md:p-12 flex flex-col justify-center items-center text-center">
-              <div className="text-6xl mb-4">🏆</div>
+              <div className="text-6xl mb-4">{isSuccess ? "🏆" : "💪"}</div>
 
               {/* Hviezdičky za správne odpovede */}
               <div className="flex items-center justify-center gap-1 mb-4">
@@ -347,7 +351,7 @@ export default function PlayPage() {
 
               <div className="flex items-center justify-center gap-3 mb-4">
                 <h1 className="text-3xl md:text-4xl font-extrabold text-teal-700">
-                  Úžasná práca!
+                  {isSuccess ? "Úžasná práca!" : "Nevadí, nabudúce to bude lepšie!"}
                 </h1>
                 {speechSupported && (
                   <button
@@ -366,11 +370,25 @@ export default function PlayPage() {
               </div>
 
               <p className="text-xl text-slate-700 mb-8 leading-relaxed font-medium">
-                Sofia a Olívia sú na teba hrdé. Dokázal si vyriešiť{' '}
-                <span className="font-bold text-teal-700">
-                  {correctCount} z {totalScenarios}
-                </span>{' '}
-                dôležitých situácií a vieš, ako sa zachovať bezpečne.
+                {isSuccess ? (
+                  <>
+                    Sofia a Olívia sú na teba hrdé. Dokázal si vyriešiť{" "}
+                    <span className="font-bold text-teal-700">
+                      {correctCount} z {totalScenarios}
+                    </span>{" "}
+                    dôležitých situácií a vieš, ako sa zachovať bezpečne. Teraz si skutočný strážca
+                    bezpečnosti!
+                  </>
+                ) : (
+                  <>
+                    Nevadí, tento raz sa ti podarilo vyriešiť{" "}
+                    <span className="font-bold text-teal-700">
+                      {correctCount} z {totalScenarios}
+                    </span>{" "}
+                    situácií. Ak si hru zahráš znova, naučíš sa, ako sa zachovať bezpečne a nabudúce
+                    to pôjde ešte lepšie!
+                  </>
+                )}
               </p>
               <div className="flex flex-col gap-4 w-full">
                 <button 
