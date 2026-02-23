@@ -80,7 +80,7 @@
     "topic": "Bezpečnosť domova",
     "title": "Niekto zvoní pri dverách",
     "image": "/images/scenarios/scenario_05_door.webp",
-    "text": "Sofia a Olívia sú samy v izbe a zrazu niekto zazvoní. Pozrú sa cez priezor a uvidia uja v uniforme, ktorý hovorí: 'Mám pre mamku balík, otvor mi, prosím, nech ti ho môžem podať.' Čo by mali urobiť?",
+    "text": "Sofia a Olívia sú samy v izbe a zrazu niekto zazvoní. Ujo v uniforme za dverami hovorí: 'Mám pre mamku balík, otvor mi, prosím, nech ti ho môžem podať.' Čo by mali urobiť?",
     "options": [
       {
         "text": "Otvoria dvere a balík od uja prevezmú, aby pomohli mamke.",
@@ -90,7 +90,7 @@
       {
         "text": "Dvere neotvoria a cez zatvorené dvere povedia, aby ujo nechal balík pred dverami alebo prišiel neskôr.",
         "isCorrect": true,
-        "feedback": "Správne! Dvere musia zostať zamknuté. Bezpečný dospelý pochopí, že dieťa nemôže otvárať, a balík nechá u susedov alebo pred dverami."
+        "feedback": "Správne! Dvere musia zostať zamknuté. Bezpečný dospelý pochopí, že dieťa nemôže otvárať a balík nechá u susedov alebo pred dverami."
       }
     ]
   },
