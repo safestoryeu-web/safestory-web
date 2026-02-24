@@ -42,12 +42,20 @@ export default function Home() {
           Aktuálne máme v databáze pripravených <strong className="text-sky-700">{scenarios.length} scenárov</strong>.
         </p>
         
-        <Link
-          href="/play"
-          className="inline-block bg-sky-500 hover:bg-sky-600 text-white font-bold py-4 px-12 rounded-full text-2xl transition-all shadow-[0_8px_30px_rgb(14,165,233,0.4)] hover:shadow-[0_8px_30px_rgb(14,165,233,0.6)] transform hover:-translate-y-1"
-        >
-          Začať hrať
-        </Link>
+        <div className="flex flex-col items-center gap-3">
+          <Link
+            href="/play"
+            className="inline-block bg-sky-500 hover:bg-sky-600 text-white font-bold py-4 px-12 rounded-full text-2xl transition-all shadow-[0_8px_30px_rgb(14,165,233,0.4)] hover:shadow-[0_8px_30px_rgb(14,165,233,0.6)] transform hover:-translate-y-1"
+          >
+            Začať hrať
+          </Link>
+          <Link
+            href="/about"
+            className="inline-block text-sm md:text-base font-semibold text-sky-900 bg-white/75 border border-sky-200/80 rounded-full py-2 px-6 shadow-sm hover:bg-white hover:border-sky-300 transition-colors"
+          >
+            O projekte
+          </Link>
+        </div>
       </div>
 
       {/* Jemný copyright / kontakt dole */}

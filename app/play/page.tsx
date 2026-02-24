@@ -473,7 +473,7 @@ export default function PlayPage() {
                   </>
                 )}
               </p>
-              <div className="flex flex-col gap-4 w-full">
+              <div className="flex flex-col gap-3 w-full items-center">
                 <button 
                   onClick={restartGame}
                   className="bg-teal-500 hover:bg-teal-600 text-white font-bold py-4 px-10 rounded-full text-2xl transition-all shadow-lg transform hover:-translate-y-1"
@@ -485,6 +485,12 @@ export default function PlayPage() {
                   className="text-teal-700 hover:text-teal-900 font-bold text-lg mt-2"
                 >
                   Návrat domov
+                </Link>
+                <Link
+                  href="/about"
+                  className="text-xs md:text-sm text-slate-600 hover:text-teal-700 underline underline-offset-2 mt-1"
+                >
+                  O projekte SafeStory
                 </Link>
               </div>
             </div>
@@ -509,7 +515,7 @@ export default function PlayPage() {
                   fill
                   sizes="(max-width: 768px) 100vw, 40vw"
                   className="object-cover md:object-cover"
-                  style={{ objectPosition: '50% 75%' }}
+                  style={{ objectPosition: '50% 60%' }}
                   priority
                 />
               </div>
