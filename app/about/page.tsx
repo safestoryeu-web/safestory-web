@@ -39,7 +39,7 @@ export default function AboutPage() {
           <h2 className="text-2xl font-bold text-slate-800 mb-4">Podporte náš projekt</h2>
           <p className="text-slate-600 mb-6">
             Aplikácia je pre všetkých rodičov a deti zadarmo. Ak vám však naše príbehy aspoň trochu pomohli otvoriť s vašimi deťmi dôležité témy o bezpečnosti a vidíte v tomto projekte zmysel, budem nesmierne vďačný za akúkoľvek drobnú podporu. 
-            Vaša symbolická 'káva' mi pomôže pokryť náklady na web a dodá mi energiu do tvorby ďalších užitočných scenárov. Ďakujem! ❤️
+            Vaša symbolická 'káva' mi pomôže pokryť náklady na web a dodá mi energiu do tvorby ďalších užitočných scenárov. Ďakujem, otec Martin ❤️
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
