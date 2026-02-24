@@ -264,5 +264,24 @@
         "feedback": "Správne! Zapaľovače patria len do rúk dospelým. Výborne, že si to neskúšala sama a hneď si zavolala pomoc."
       }
     ]
+  },
+  {
+    "id": 15,
+    "topic": "Bezpečnosť doma",
+    "title": "Farebné kapsule",
+    "image": "/images/scenarios/scenario_15_laundry.webp",
+    "text": "Sofia a Olívia sa hrajú na schovávačku a schovajú sa do kúpeľne. Na zemi pri práčke nájdu otvorenú krabičku s farebnými gélovými kapsulami na pranie. Vyzerajú presne ako veľké, mäkké a voňavé želé cukríky. Čo by mali urobiť?",
+    "options": [
+      {
+        "text": "Opatrne zobrať jednu kapsulu, zblízka ju ovoňať a trošku z nej ochutnať, či je to naozaj sladkosť.",
+        "isCorrect": false,
+        "feedback": "Pozor! Kapsule do prania sú plné nebezpečných chemikálií. Aj keď voňajú a vyzerajú krásne, môžu ti veľmi ublížiť. Nikdy nič z kúpeľne nedávaj do úst!"
+      },
+      {
+        "text": "Vôbec sa ich nedotýkať, nechať ich na zemi a ísť povedať rodičom, že krabička je otvorená.",
+        "isCorrect": true,
+        "feedback": "Výborne! Správne ste uhádli, že to nie sú cukríky. Čistiace prostriedky chytajú len dospelí, keď idú prať oblečenie."
+      }
+    ]
   }
 ]

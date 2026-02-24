@@ -264,5 +264,24 @@
         "feedback": "Correct! Lighters belong only in the hands of adults. Great job not trying it yourself and calling for help right away."
       }
     ]
+  },
+  {
+    "id": 15,
+    "topic": "Home Safety",
+    "title": "Colorful Laundry Pods",
+    "image": "/images/scenarios/scenario_15_laundry.webp",
+    "text": "Sofia and Olivia are playing hide and seek and hide in the bathroom. On the floor next to the washing machine, they find an open box of colorful laundry detergent pods. They look exactly like big, soft, and sweet jelly candies. What should they do?",
+    "options": [
+      {
+        "text": "Carefully pick one up, smell it closely, and take a little taste to see if it's really a candy.",
+        "isCorrect": false,
+        "feedback": "Watch out! Laundry pods are full of dangerous chemicals. Even if they smell and look beautiful, they can hurt you a lot. Never put anything from the bathroom in your mouth!"
+      },
+      {
+        "text": "Do not touch them at all, leave them on the floor, and go tell their parents that the box is open.",
+        "isCorrect": true,
+        "feedback": "Excellent! You guessed correctly that these are not candies. Cleaning products are only handled by adults when they do the laundry."
+      }
+    ]
   }
 ]
