@@ -1,0 +1,230 @@
+[
+  {
+    "id": 1,
+    "topic": "Strangers",
+    "title": "Unknown man with a gift",
+    "image": "/images/scenarios/scenaario_01_balloon.webp",
+    "text": "Sofia and Olivia are playing at the playground. A friendly man comes up, smiles and offers them a nice blue balloon. He says he has more balloons in his car and even a little puppy. What should the girls do?",
+    "options": [
+      {
+        "text": "They take the balloon and go with the man to the car.",
+        "isCorrect": false,
+        "feedback": "Never go with a stranger to a car, even if they are very kind and promise gifts or puppies. Strangers may lie to take you away. Always run away and tell an adult you trust."
+      },
+      {
+        "text": "They say 'No', leave quickly and tell their parents.",
+        "isCorrect": true,
+        "feedback": "Well done! This is the safest response. Saying a clear 'NO', moving away from the stranger and finding a safe adult (parent, teacher) is exactly the right thing to do."
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "topic": "Strangers",
+    "title": "The man who is lost",
+    "image": "/images/scenarios/scenario_02_map.webp",
+    "text": "Sofia and Olivia are on the pavement in front of their house. A car stops, the man rolls down the window and says he is lost. He shows them a map and asks them to come closer to the car to show him the street. What should the girls do?",
+    "options": [
+      {
+        "text": "They go to the car window and try to help him find the street.",
+        "isCorrect": false,
+        "feedback": "Be careful! An adult should never ask a child for help. If someone in a car needs directions, they should ask another adult. Never go to a stranger's car window!"
+      },
+      {
+        "text": "They step back from the car and say they need to call their parents.",
+        "isCorrect": true,
+        "feedback": "Well done! Keeping your distance from the car is safest. If an adult wants something, the girls should go find their parents or another adult they know."
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "topic": "Getting lost",
+    "title": "Alone at the mall",
+    "image": "/images/scenarios/scenario_03_mall.webp",
+    "text": "Sofia is at a big store with her mum. She is interested in the toy display and lets go of her mum's hand for a moment. When she looks round, her mum is gone. Sofia is lost in a crowd of strangers. What should she do?",
+    "options": [
+      {
+        "text": "She runs around the store looking for her mum.",
+        "isCorrect": false,
+        "feedback": "If you run around, you can get even more lost and it will be harder for your mum to find you. It's best to stay where you last saw your mum or ask for help."
+      },
+      {
+        "text": "She finds a shop assistant or security guard and tells them she is lost.",
+        "isCorrect": true,
+        "feedback": "Correct! If you get lost in a store, find a 'safe adult' – like a shop assistant or security guard. They will help you find your parents."
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "topic": "Animals",
+    "title": "Lost puppy",
+    "image": "/images/scenarios/scenario_04_dog.webp",
+    "text": "Sofia and Olivia see a cute dog with a fluffy tail in the park. It is running alone and looks very sad. Olivia wants to pet it straight away and take it home. What should the girls do?",
+    "options": [
+      {
+        "text": "They run to it and start petting it so it won't be sad.",
+        "isCorrect": false,
+        "feedback": "Be careful! Even the friendliest dog can get scared of a stranger and bite. Never touch a dog without its owner."
+      },
+      {
+        "text": "They don't touch the dog and go find an adult they know to tell them about it.",
+        "isCorrect": true,
+        "feedback": "Correct! If you see a dog on its own, the safest thing is not to touch it and to get an adult to help find its owner."
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "topic": "Home safety",
+    "title": "Someone at the door",
+    "image": "/images/scenarios/scenario_05_door.webp",
+    "text": "Sofia and Olivia are alone in the room when someone rings the doorbell. A man in a uniform says: 'I have a parcel for your mum, please open the door so I can hand it to you.' What should they do?",
+    "options": [
+      {
+        "text": "They open the door and take the parcel to help their mum.",
+        "isCorrect": false,
+        "feedback": "Never open the door to anyone you don't know, even if they wear a uniform or bring a gift. It can be dangerous."
+      },
+      {
+        "text": "They don't open the door and say through the door that he can leave the parcel outside or come back later.",
+        "isCorrect": true,
+        "feedback": "Correct! The door must stay locked. A safe adult will understand that a child cannot open the door and will leave the parcel with a neighbour or outside."
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "topic": "Safety at home",
+    "title": "Coloured pills",
+    "image": "/images/scenarios/scenario_06_pills.webp",
+    "text": "Sofia finds an open box of colourful pills on the kitchen table. They look just like her favourite sweets and she really wants to try one. What should she do?",
+    "options": [
+      {
+        "text": "She tastes one to see if it's really a sweet.",
+        "isCorrect": false,
+        "feedback": "Be careful! Never eat anything you find in a box or bottle, even if it looks like a sweet. It could be medicine and make you very ill."
+      },
+      {
+        "text": "She doesn't take any and goes to ask an adult what is in the box.",
+        "isCorrect": true,
+        "feedback": "Correct! Only an adult knows what is safe in the box. Always ask before you taste anything."
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "topic": "Safety outside",
+    "title": "Finding something in the sandpit",
+    "image": "/images/scenarios/scenario_07_sandbox.webp",
+    "text": "Sofia and Olivia are playing in the sandpit and building a castle. Suddenly Sofia sees something sharp and shiny in the sand that someone left there. It looks like an interesting toy. What should Sofia do?",
+    "options": [
+      {
+        "text": "She picks it up and shows it to Olivia to see what it is.",
+        "isCorrect": false,
+        "feedback": "Be careful! Never touch sharp or unknown things like needles or broken glass. You could get hurt or ill."
+      },
+      {
+        "text": "She doesn't touch it and calls an adult who is with them at the playground.",
+        "isCorrect": true,
+        "feedback": "Correct! If you find something sharp or strange, never touch it. Tell an adult and they will clear it away safely."
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "topic": "Safety outside",
+    "title": "Unknown woman in the park",
+    "image": "/images/scenarios/scenario_08_password.webp",
+    "text": "Olivia has wandered a little away from her mum in the park. A woman she doesn't know comes up and says: 'Hi Olivia, your mum sent me to take you to the car. Come with me!' What should Olivia do?",
+    "options": [
+      {
+        "text": "She believes the woman and goes with her to the car to be with her mum sooner.",
+        "isCorrect": false,
+        "feedback": "Be careful! Never go with someone you don't know, even if they say your mum sent them. A stranger must never take you anywhere."
+      },
+      {
+        "text": "She doesn't go with the woman, stays where she is and shouts loudly for her mum.",
+        "isCorrect": true,
+        "feedback": "Correct! Never go anywhere with a stranger, even if they seem kind. The best thing is to stay where you are and shout for help."
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "topic": "My feelings",
+    "title": "Uncomfortable whispering",
+    "image": "/images/scenarios/scenario_09_secret.webp",
+    "text": "Someone Olivia doesn't know comes up and whispers something in her ear that makes her feel sad and a bit scared. The person says: 'Don't tell anyone, it's our secret.' What should Olivia do?",
+    "options": [
+      {
+        "text": "She doesn't tell anyone because she promised to keep the secret.",
+        "isCorrect": false,
+        "feedback": "Be careful! If someone tells you something that makes you feel sad or scared, it is not a good secret. Things like that must not be kept secret."
+      },
+      {
+        "text": "She tells her mum or dad straight away that someone said something that made her sad.",
+        "isCorrect": true,
+        "feedback": "Correct! If something gives you a bad feeling in your tummy, always tell an adult you trust. Mum and dad will always help you."
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "topic": "Helping others",
+    "title": "Friend in trouble",
+    "image": "/images/scenarios/scenario_10_help.webp",
+    "text": "Sofia and Olivia are playing on the climbing frame. Olivia suddenly slips, can't get down and gets scared. Sofia is with her but can't safely catch her on her own. What should Sofia do?",
+    "options": [
+      {
+        "text": "She tries to pull Olivia down by herself even though it's high.",
+        "isCorrect": false,
+        "feedback": "Be careful! If you pull her yourself, you could both fall. It's always better to call someone stronger."
+      },
+      {
+        "text": "She stays with Olivia, calms her and shouts for an adult to help.",
+        "isCorrect": true,
+        "feedback": "Correct! The best help is to call an adult. By staying with your friend and shouting for help, you're a real hero."
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "topic": "My body",
+    "title": "Unwanted hug",
+    "image": "/images/scenarios/scenario_11_hug.webp",
+    "text": "A neighbour Sofia meets in the hallway says: 'Hi Sofia, you've grown so much! Give me a big kiss and a hug!' Sofia doesn't feel comfortable and doesn't want to be hugged. What should she do?",
+    "options": [
+      {
+        "text": "She hugs him and gives him a kiss so the neighbour isn't sad and to be polite.",
+        "isCorrect": false,
+        "feedback": "You don't have to hug anyone just to be polite. Your body belongs to you and you can say 'no' if you don't like it."
+      },
+      {
+        "text": "She says 'no thank you', steps back and goes to her mum or dad.",
+        "isCorrect": true,
+        "feedback": "Correct! If any contact feels uncomfortable, you can say no, even to someone you know. Always listen to your feelings."
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "topic": "Water safety",
+    "title": "Ball in the pool",
+    "image": "/images/scenarios/scenario_12_water.webp",
+    "text": "Olivia sees her favourite inflatable ball in the swimming pool. It's floating a little way from the edge and Olivia thinks she can reach it if she leans over. No adult is watching her. What should Olivia do?",
+    "options": [
+      {
+        "text": "She tries to reach the ball carefully from the edge to get it out herself.",
+        "isCorrect": false,
+        "feedback": "Be careful! The floor around the pool is often wet and slippery. You could fall into the deep water. Never lean over the pool when you're on your own."
+      },
+      {
+        "text": "She doesn't go to the pool and runs to get an adult to tell them about the ball.",
+        "isCorrect": true,
+        "feedback": "Correct! You must always be with an adult at the pool. Safety is more important than a toy in the water. Wait for mum or dad."
+      }
+    ]
+  }
+]

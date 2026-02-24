@@ -3,13 +3,79 @@
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import scenarios from '../../data/scenarios.json';
+import scenariosSk from '../../data/scenarios.json';
+import scenariosEn from '../../data/scenarios.en.json';
+import { useLanguage } from '../LanguageContext';
+
+type Scenario = (typeof scenariosSk)[number];
+
+const playUI = {
+  sk: {
+    theme: "Téma",
+    scenario: "Scenár",
+    of: "z",
+    nextScenario: "Ďalší scenár ➡️",
+    showResult: "Ukázať výsledok! 🏁",
+    playAgain: "Hrať ešte raz 🔄",
+    backHome: "Návrat domov",
+    aboutLink: "O projekte SafeStory a Podpora",
+    feedbackCorrect: "Skvelé, správne rozhodnutie! 🎉",
+    feedbackWrong: "Pozor, toto nie je bezpečné! 🛑",
+    finalTitleSuccess: "Úžasná práca!",
+    finalTitleTryAgain: "Nevadí, nabudúce to bude lepšie!",
+    finalParaSuccess: "Sofia a Olívia sú na teba hrdé. Dokázal si vyriešiť",
+    finalParaSuccess2: "dôležitých situácií a vieš, ako sa zachovať bezpečne!",
+    finalParaTryAgain: "Nevadí, tento raz sa ti podarilo vyriešiť",
+    finalParaTryAgain2: "situácií. Ak si hru zahráš znova, naučíš sa, ako sa zachovať bezpečne a nabudúce to pôjde ešte lepšie!",
+    ariaStopScenario: "Zastaviť čítanie scenára",
+    ariaPlayScenario: "Prehrať scenár nahlas",
+    ariaStopOption: "Zastaviť čítanie odpovede",
+    ariaPlayOption: "Prehrať odpoveď nahlas",
+    ariaStopFeedback: "Zastaviť čítanie vysvetlenia",
+    ariaPlayFeedback: "Prehrať vysvetlenie nahlas",
+    ariaStopFinal: "Zastaviť čítanie hodnotenia",
+    ariaPlayFinal: "Prehrať hodnotenie nahlas",
+    altCongratulations: "Gratulujeme!",
+    altTryAgain: "Skús to znova",
+  },
+  en: {
+    theme: "Theme",
+    scenario: "Scenario",
+    of: "of",
+    nextScenario: "Next scenario ➡️",
+    showResult: "Show result! 🏁",
+    playAgain: "Play again 🔄",
+    backHome: "Back home",
+    aboutLink: "About SafeStory & Support",
+    feedbackCorrect: "Great, the right choice! 🎉",
+    feedbackWrong: "Watch out, that's not safe! 🛑",
+    finalTitleSuccess: "Amazing job!",
+    finalTitleTryAgain: "No worries, next time will be better!",
+    finalParaSuccess: "Sofia and Olivia are proud of you. You solved",
+    finalParaSuccess2: "important situations and know how to stay safe!",
+    finalParaTryAgain: "No worries, this time you solved",
+    finalParaTryAgain2: "situations. If you play again, you'll learn how to stay safe and do even better next time!",
+    ariaStopScenario: "Stop reading scenario",
+    ariaPlayScenario: "Play scenario aloud",
+    ariaStopOption: "Stop reading answer",
+    ariaPlayOption: "Play answer aloud",
+    ariaStopFeedback: "Stop reading explanation",
+    ariaPlayFeedback: "Play explanation aloud",
+    ariaStopFinal: "Stop reading summary",
+    ariaPlayFinal: "Play summary aloud",
+    altCongratulations: "Congratulations!",
+    altTryAgain: "Try again",
+  },
+} as const;
 
 export default function PlayPage() {
+  const { language } = useLanguage();
+  const scenarios: Scenario[] = language === "en" ? (scenariosEn as Scenario[]) : (scenariosSk as Scenario[]);
+
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedOption, setSelectedOption] = useState<number | null>(null);
   const [showFeedback, setShowFeedback] = useState(false);
-  const [isFinished, setIsFinished] = useState(false); // Nový stav pre koniec hry
+  const [isFinished, setIsFinished] = useState(false);
   const [correctCount, setCorrectCount] = useState(0);
   const [speechSupported, setSpeechSupported] = useState(false);
   const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
@@ -19,6 +85,7 @@ export default function PlayPage() {
   const [scenarioOrder, setScenarioOrder] = useState<number[]>([]);
   const audioContextRef = useRef<AudioContext | null>(null);
 
+  const t = playUI[language];
   const totalScenarios = scenarios.length;
   const effectiveIndex =
     scenarioOrder.length > 0 && currentIndex < scenarioOrder.length
@@ -50,7 +117,7 @@ export default function PlayPage() {
     };
   }, []);
 
-  // Nastavíme náhodné poradie scenárov len na klientovi po načítaní
+  // Náhodné poradie scenárov podľa zvoleného jazyka
   useEffect(() => {
     const indices = scenarios.map((_, i) => i);
     for (let i = indices.length - 1; i > 0; i--) {
@@ -58,7 +125,7 @@ export default function PlayPage() {
       [indices[i], indices[j]] = [indices[j], indices[i]];
     }
     setScenarioOrder(indices);
-  }, []);
+  }, [language]);
 
   // Pri zmene scenára zrušíme prípadné prebiehajúce čítanie
   useEffect(() => {
@@ -113,26 +180,33 @@ export default function PlayPage() {
     playTone(350, 0.18, "square", 0.16);
   };
 
-  const getPreferredVoice = () => {
+  const getPreferredVoice = (lang: 'sk' | 'en') => {
     if (!voices.length) return undefined;
 
-    // Pôvodný jednoduchší výber – preferujeme SK/CZ alebo ženské meno
+    const name = (v: SpeechSynthesisVoice) => (v.name || '').toLowerCase();
+    const voiceLang = (v: SpeechSynthesisVoice) => (v.lang || '').toLowerCase();
+    const soundsFemale = (v: SpeechSynthesisVoice) => {
+      const n = name(v);
+      return n.includes('female') || n.includes('woman') || n.includes('zuzana') || n.includes('eva') || n.includes('jana');
+    };
+
+    if (lang === 'en') {
+      // Pre angličtinu: preferujeme anglický hlas (en-GB, en-US), ideálne ženský
+      const enVoices = voices.filter((v) => voiceLang(v).startsWith('en'));
+      const enFemale = enVoices.filter((v) => soundsFemale(v));
+      return enFemale[0] || enVoices[0] || voices.find((v) => voiceLang(v).startsWith('en')) || voices[0];
+    }
+
+    // Pre slovenčinu: preferujeme SK/CZ alebo ženské meno
     const preferredVoices = voices.filter((voice) => {
-      const name = voice.name.toLowerCase();
-      const lang = (voice.lang || '').toLowerCase();
-      const isSkOrCz = lang.startsWith('sk') || lang.startsWith('cs');
-      const soundsFemale =
-        name.includes('female') ||
-        name.includes('woman') ||
-        name.includes('zuzana') ||
-        name.includes('eva') ||
-        name.includes('jana');
-
-      return isSkOrCz || soundsFemale;
+      const langCode = voiceLang(voice);
+      const isSkOrCz = langCode.startsWith('sk') || langCode.startsWith('cs');
+      return isSkOrCz || soundsFemale(voice);
     });
-
     return preferredVoices[0] || voices[0];
   };
+
+  const getUtteranceLang = () => (language === 'en' ? 'en-GB' : 'sk-SK');
 
   const speakCurrentScenario = () => {
     if (!speechSupported || typeof window === 'undefined' || !('speechSynthesis' in window)) return;
@@ -143,8 +217,8 @@ export default function PlayPage() {
     const utterance = new SpeechSynthesisUtterance(
       `${currentScenario.title}. ${currentScenario.text}`
     );
-
-    const voiceToUse = getPreferredVoice();
+    utterance.lang = getUtteranceLang();
+    const voiceToUse = getPreferredVoice(language);
     if (voiceToUse) {
       utterance.voice = voiceToUse;
     }
@@ -178,8 +252,8 @@ export default function PlayPage() {
     synth.cancel();
 
     const utterance = new SpeechSynthesisUtterance(text);
-
-    const voiceToUse = getPreferredVoice();
+    utterance.lang = getUtteranceLang();
+    const voiceToUse = getPreferredVoice(language);
     if (voiceToUse) {
       utterance.voice = voiceToUse;
     }
@@ -213,8 +287,8 @@ export default function PlayPage() {
     synth.cancel();
 
     const utterance = new SpeechSynthesisUtterance(text);
-
-    const voiceToUse = getPreferredVoice();
+    utterance.lang = getUtteranceLang();
+    const voiceToUse = getPreferredVoice(language);
     if (voiceToUse) {
       utterance.voice = voiceToUse;
     }
@@ -292,14 +366,18 @@ export default function PlayPage() {
     const synth = window.speechSynthesis;
     synth.cancel();
 
-    const successText = `Úžasná práca! Dokázal si vyriešiť ${correctCount} z ${totalScenarios} dôležitých situácií a teraz vieš, ako sa zachovať bezpečne.`;
-    const tryAgainText = `Nevadí, nabudúce to bude lepšie. Teraz si vyriešil ${correctCount} z ${totalScenarios} situácií. Skús to ešte raz a naučíš sa, ako sa zachovať bezpečne.`;
+    const successText = language === "en"
+      ? `Amazing job! You solved ${correctCount} out of ${totalScenarios} important situations and now you know how to stay safe.`
+      : `Úžasná práca! Dokázal si vyriešiť ${correctCount} z ${totalScenarios} dôležitých situácií a teraz vieš, ako sa zachovať bezpečne.`;
+    const tryAgainText = language === "en"
+      ? `No worries, next time will be better. You solved ${correctCount} out of ${totalScenarios} situations. Try again and you'll learn how to stay safe.`
+      : `Nevadí, nabudúce to bude lepšie. Teraz si vyriešil ${correctCount} z ${totalScenarios} situácií. Skús to ešte raz a naučíš sa, ako sa zachovať bezpečne.`;
 
     const summaryText = isSuccess ? successText : tryAgainText;
 
     const utterance = new SpeechSynthesisUtterance(summaryText);
-
-    const voiceToUse = getPreferredVoice();
+    utterance.lang = getUtteranceLang();
+    const voiceToUse = getPreferredVoice(language);
     if (voiceToUse) {
       utterance.voice = voiceToUse;
     }
@@ -410,7 +488,7 @@ export default function PlayPage() {
             <div className="relative w-full h-80 md:w-1/2 md:h-auto">
               <Image 
                 src={isSuccess ? "/images/scenarios/victory_celebration.webp" : "/images/scenarios/try_again.webp"} 
-                alt={isSuccess ? "Gratulujeme!" : "Skús to znova"}
+                alt={isSuccess ? t.altCongratulations : t.altTryAgain}
                 fill
                 className="object-cover"
               />
@@ -435,7 +513,7 @@ export default function PlayPage() {
 
               <div className="flex items-center justify-center gap-3 mb-4">
                 <h1 className="text-3xl md:text-4xl font-extrabold text-teal-700">
-                  {isSuccess ? "Úžasná práca!" : "Nevadí, nabudúce to bude lepšie!"}
+                  {isSuccess ? t.finalTitleSuccess : t.finalTitleTryAgain}
                 </h1>
                 {speechSupported && (
                   <button
@@ -444,8 +522,8 @@ export default function PlayPage() {
                     className="shrink-0 w-11 h-11 md:w-12 md:h-12 rounded-full border-2 border-teal-500 bg-white/70 text-teal-700 flex items-center justify-center shadow-sm hover:bg-teal-500 hover:text-white transition-colors"
                     aria-label={
                       isSpeaking && speakingSource === 'final'
-                        ? 'Zastaviť čítanie hodnotenia'
-                        : 'Prehrať hodnotenie nahlas'
+                        ? t.ariaStopFinal
+                        : t.ariaPlayFinal
                     }
                   >
                     {isSpeaking && speakingSource === 'final' ? '⏹' : '🔊'}
@@ -456,20 +534,19 @@ export default function PlayPage() {
               <p className="text-xl text-slate-700 mb-8 leading-relaxed font-medium">
                 {isSuccess ? (
                   <>
-                    Sofia a Olívia sú na teba hrdé. Dokázal si vyriešiť{" "}
+                    {t.finalParaSuccess}{" "}
                     <span className="font-bold text-teal-700">
-                      {correctCount} z {totalScenarios}
+                      {correctCount} {t.of} {totalScenarios}
                     </span>{" "}
-                    dôležitých situácií a vieš, ako sa zachovať bezpečne!
+                    {t.finalParaSuccess2}
                   </>
                 ) : (
                   <>
-                    Nevadí, tento raz sa ti podarilo vyriešiť{" "}
+                    {t.finalParaTryAgain}{" "}
                     <span className="font-bold text-teal-700">
-                      {correctCount} z {totalScenarios}
+                      {correctCount} {t.of} {totalScenarios}
                     </span>{" "}
-                    situácií. Ak si hru zahráš znova, naučíš sa, ako sa zachovať bezpečne a nabudúce
-                    to pôjde ešte lepšie!
+                    {t.finalParaTryAgain2}
                   </>
                 )}
               </p>
@@ -478,19 +555,19 @@ export default function PlayPage() {
                   onClick={restartGame}
                   className="bg-teal-500 hover:bg-teal-600 text-white font-bold py-4 px-10 rounded-full text-2xl transition-all shadow-lg transform hover:-translate-y-1"
                 >
-                  Hrať ešte raz 🔄
+                  {t.playAgain}
                 </button>
                 <Link 
                   href="/"
                   className="text-teal-700 hover:text-teal-900 font-bold text-lg mt-2"
                 >
-                  Návrat domov
+                  {t.backHome}
                 </Link>
                 <Link
                   href="/about"
                   className="text-xs md:text-sm text-slate-600 hover:text-teal-700 underline underline-offset-2 mt-1"
                 >
-                  O projekte SafeStory
+                  {t.aboutLink}
                 </Link>
               </div>
             </div>
@@ -523,7 +600,7 @@ export default function PlayPage() {
 
             <div className="w-full md:w-7/12 p-8 md:p-12 flex flex-col justify-center">
               <div className="text-sm font-bold text-teal-600 uppercase tracking-widest mb-3 mt-4 md:mt-0">
-                Téma: {currentScenario.topic} | Scenár {currentIndex + 1} z {scenarios.length}
+                {t.theme}: {currentScenario.topic} | {t.scenario} {currentIndex + 1} {t.of} {scenarios.length}
               </div>
 
               <div className="flex items-start justify-between gap-3 mb-6">
@@ -537,8 +614,8 @@ export default function PlayPage() {
                     className="shrink-0 w-11 h-11 md:w-12 md:h-12 rounded-full border-2 border-teal-500 bg-white/70 text-teal-700 flex items-center justify-center shadow-sm hover:bg-teal-500 hover:text-white transition-colors"
                     aria-label={
                       isSpeaking && speakingSource === 'scenario'
-                        ? 'Zastaviť čítanie scenára'
-                        : 'Prehrať scenár nahlas'
+                        ? t.ariaStopScenario
+                        : t.ariaPlayScenario
                     }
                   >
                     {isSpeaking && speakingSource === 'scenario' ? '⏹' : '🔊'}
@@ -577,8 +654,8 @@ export default function PlayPage() {
                           className="shrink-0 w-11 h-11 md:w-12 md:h-12 rounded-full border-2 border-teal-500 bg-white/70 text-teal-700 flex items-center justify-center shadow-sm hover:bg-teal-500 hover:text-white transition-colors"
                           aria-label={
                             isOptionSpeaking
-                              ? 'Zastaviť čítanie odpovede'
-                              : 'Prehrať odpoveď nahlas'
+                              ? t.ariaStopOption
+                              : t.ariaPlayOption
                           }
                         >
                           {isOptionSpeaking ? '⏹' : '🔊'}
@@ -592,7 +669,7 @@ export default function PlayPage() {
               {showFeedback && selectedOption !== null && (
                 <div className={`mt-8 p-6 rounded-2xl shadow-inner ${currentScenario.options[selectedOption].isCorrect ? 'bg-green-100 border border-green-300' : 'bg-red-100 border border-red-300'}`}>
                   <h3 className={`text-2xl font-bold mb-2 ${currentScenario.options[selectedOption].isCorrect ? 'text-green-800' : 'text-red-800'}`}>
-                    {currentScenario.options[selectedOption].isCorrect ? 'Skvelé, správne rozhodnutie! 🎉' : 'Pozor, toto nie je bezpečné! 🛑'}
+                    {currentScenario.options[selectedOption].isCorrect ? t.feedbackCorrect : t.feedbackWrong}
                   </h3>
                   <p className="text-lg text-slate-700 mb-6 font-medium leading-relaxed">
                     {currentScenario.options[selectedOption].feedback}
@@ -602,7 +679,7 @@ export default function PlayPage() {
                       onClick={handleNextScenario}
                       className="bg-teal-500 hover:bg-teal-600 text-white font-bold py-3 px-8 rounded-full text-xl transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5 inline-block w-full md:w-auto"
                     >
-                      {currentIndex < scenarios.length - 1 ? 'Ďalší scenár ➡️' : 'Ukázať výsledok! 🏁'}
+                      {currentIndex < scenarios.length - 1 ? t.nextScenario : t.showResult}
                     </button>
                     {speechSupported && (
                       <button
@@ -611,8 +688,8 @@ export default function PlayPage() {
                         className="shrink-0 w-11 h-11 md:w-12 md:h-12 rounded-full border-2 border-teal-500 bg-white/70 text-teal-700 flex items-center justify-center shadow-sm hover:bg-teal-500 hover:text-white transition-colors"
                         aria-label={
                           isSpeaking && speakingSource === 'feedback'
-                            ? 'Zastaviť čítanie vysvetlenia'
-                            : 'Prehrať vysvetlenie nahlas'
+                            ? t.ariaStopFeedback
+                            : t.ariaPlayFeedback
                         }
                       >
                         {isSpeaking && speakingSource === 'feedback' ? '⏹' : '🔊'}
