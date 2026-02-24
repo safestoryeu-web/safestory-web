@@ -226,5 +226,24 @@
         "feedback": "Correct! You must always be with an adult at the pool. Safety is more important than a toy in the water. Wait for mum or dad."
       }
     ]
+  },
+  {
+    "id": 13,
+    "topic": "Road Safety",
+    "title": "The Stray Ball",
+    "image": "/images/scenarios/scenario_13_road.webp",
+    "text": "Sofia and Olivia are playing with a new ball near the sidewalk. Suddenly, the ball bounces away and rolls right onto a busy road with driving cars. The ball is lying in the middle of the street, and the girls are very sad about it. What should they do?",
+    "options": [
+      {
+        "text": "Quickly run onto the road and grab the ball while there are no cars coming.",
+        "isCorrect": false,
+        "feedback": "Watch out! The road is not a playground. Even if it seems like no car is coming, one can appear very fast. No toy is worth getting hurt over."
+      },
+      {
+        "text": "Stay safely on the sidewalk and ask an adult for help.",
+        "isCorrect": true,
+        "feedback": "Excellent! That's the right choice. You must never run onto the road for a toy. An adult knows how to safely retrieve the ball, or they will just get you a new one."
+      }
+    ]
   }
 ]

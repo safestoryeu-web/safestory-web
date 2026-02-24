@@ -213,7 +213,7 @@
     "topic": "Bezpečnosť pri vode",
     "title": "Lopta v bazéne",
     "image": "/images/scenarios/scenario_12_water.webp",
-    "text": "Olívia uvidí v plaveckom bazéne svoju obľúbenú nafukovaciu loptu. Pláva kúsok od kraja a Olívia si myslí, že na ňu doiahne, ak sa poriadne nakloní. Nikto dospelý ju práve nevidí. Čo by mala Olívia urobiť?",
+    "text": "Olívia uvidí v plaveckom bazéne svoju obľúbenú nafukovaciu loptu. Pláva kúsok od kraja a Olívia si myslí, že na ňu dočiahne, ak sa poriadne nakloní. Nikto dospelý ju práve nevidí. Čo by mala Olívia urobiť?",
     "options": [
       {
         "text": "Skúsi sa po loptu opatrne natiahnuť z kraja bazéna, aby ju vytiahla sama.",
@@ -224,6 +224,25 @@
         "text": "K bazénu vôbec nejde a uteká zavolať dospelého, aby mu o lopte povedala.",
         "isCorrect": true,
         "feedback": "Správne! Pri bazéne musíš byť vždy s dospelým. Bezpečnosť je dôležitejšia než hračka vo vode. Počkaj na mamku alebo ocka."
+      }
+    ]
+  },
+  {
+    "id": 13,
+    "topic": "Bezpečnosť na ceste",
+    "title": "Zatúlaná lopta",
+    "image": "/images/scenarios/scenario_13_road.webp",
+    "text": "Sofia a Olívia sa hrajú s novou loptou blízko chodníka. Zrazu im lopta odskočí a skotúľa sa priamo na rušnú cestu, po ktorej jazdia autá. Lopta leží v strede cesty a dievčatám je to veľmi ľúto. Čo by mali urobiť?",
+    "options": [
+      {
+        "text": "Rýchlo sa rozbehnúť na cestu a loptu zobrať, kým nejde žiadne auto.",
+        "isCorrect": false,
+        "feedback": "Pozor! Cesta nie je ihrisko. Aj keď sa zdá, že auto práve nejde, môže sa objaviť veľmi rýchlo. Žiadna hračka nestojí za to, aby si sa zranil/a."
+      },
+      {
+        "text": "Zostať stáť v bezpečí na chodníku a poprosiť o pomoc dospelého.",
+        "isCorrect": true,
+        "feedback": "Výborne! Správne rozhodnutie. Pre hračku na cestu nikdy nesmieš vybehnúť. Dospelý vie, ako bezpečne loptu zobrať, alebo ti radšej kúpi novú."
       }
     ]
   }
