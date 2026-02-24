@@ -83,6 +83,7 @@ export default function PlayPage() {
   const [speakingSource, setSpeakingSource] = useState<'scenario' | 'option' | 'feedback' | 'final' | null>(null);
   const [speakingOptionIndex, setSpeakingOptionIndex] = useState<number | null>(null);
   const [scenarioOrder, setScenarioOrder] = useState<number[]>([]);
+  const [optionOrderState, setOptionOrderState] = useState<{ scenarioIndex: number; indices: number[] }>({ scenarioIndex: -1, indices: [] });
   const audioContextRef = useRef<AudioContext | null>(null);
 
   const t = playUI[language];
@@ -126,6 +127,18 @@ export default function PlayPage() {
     }
     setScenarioOrder(indices);
   }, [language]);
+
+  // Náhodné poradie možností odpovedí pre aktuálny scenár
+  useEffect(() => {
+    const scenario = scenarios[effectiveIndex];
+    if (!scenario?.options?.length) return;
+    const indices = scenario.options.map((_, i) => i);
+    for (let i = indices.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [indices[i], indices[j]] = [indices[j], indices[i]];
+    }
+    setOptionOrderState({ scenarioIndex: effectiveIndex, indices });
+  }, [effectiveIndex, scenarios]);
 
   // Pri zmene scenára zrušíme prípadné prebiehajúce čítanie
   useEffect(() => {
@@ -627,43 +640,51 @@ export default function PlayPage() {
               </p>
 
               <div className="flex flex-col gap-4">
-                {currentScenario.options.map((option, index) => {
-                  let buttonStyle = "border-white bg-white/60 hover:border-teal-400 hover:bg-white text-slate-700 backdrop-blur-sm"; 
-                  if (showFeedback) {
-                    if (option.isCorrect) buttonStyle = "border-green-500 bg-green-100 text-green-800";
-                    else if (selectedOption === index) buttonStyle = "border-red-500 bg-red-100 text-red-800";
-                    else buttonStyle = "border-white/50 bg-white/30 text-slate-500 opacity-50";
-                  }
-                  const isOptionSpeaking =
-                    isSpeaking &&
-                    speakingSource === 'option' &&
-                    speakingOptionIndex === index;
-                  return (
-                    <div key={index} className="flex items-stretch gap-3">
-                      <button 
-                        onClick={() => handleOptionClick(index)}
-                        disabled={showFeedback}
-                        className={`flex-1 text-left p-5 md:p-6 rounded-2xl border-2 transition-all text-lg font-medium shadow-sm ${buttonStyle}`}
-                      >
-                        {option.text}
-                      </button>
-                      {speechSupported && !showFeedback && (
+                {(() => {
+                  const displayOrder =
+                    optionOrderState.scenarioIndex === effectiveIndex &&
+                    optionOrderState.indices.length === currentScenario.options.length
+                      ? optionOrderState.indices
+                      : currentScenario.options.map((_, i) => i);
+                  return displayOrder.map((originalIndex) => {
+                    const option = currentScenario.options[originalIndex];
+                    let buttonStyle = "border-white bg-white/60 hover:border-teal-400 hover:bg-white text-slate-700 backdrop-blur-sm";
+                    if (showFeedback) {
+                      if (option.isCorrect) buttonStyle = "border-green-500 bg-green-100 text-green-800";
+                      else if (selectedOption === originalIndex) buttonStyle = "border-red-500 bg-red-100 text-red-800";
+                      else buttonStyle = "border-white/50 bg-white/30 text-slate-500 opacity-50";
+                    }
+                    const isOptionSpeaking =
+                      isSpeaking &&
+                      speakingSource === 'option' &&
+                      speakingOptionIndex === originalIndex;
+                    return (
+                      <div key={originalIndex} className="flex items-stretch gap-3">
                         <button
-                          type="button"
-                          onClick={() => handleToggleOptionSpeak(index, option.text)}
-                          className="shrink-0 w-11 h-11 md:w-12 md:h-12 rounded-full border-2 border-teal-500 bg-white/70 text-teal-700 flex items-center justify-center shadow-sm hover:bg-teal-500 hover:text-white transition-colors"
-                          aria-label={
-                            isOptionSpeaking
-                              ? t.ariaStopOption
-                              : t.ariaPlayOption
-                          }
+                          onClick={() => handleOptionClick(originalIndex)}
+                          disabled={showFeedback}
+                          className={`flex-1 text-left p-5 md:p-6 rounded-2xl border-2 transition-all text-lg font-medium shadow-sm ${buttonStyle}`}
                         >
-                          {isOptionSpeaking ? '⏹' : '🔊'}
+                          {option.text}
                         </button>
-                      )}
-                    </div>
-                  );
-                })}
+                        {speechSupported && !showFeedback && (
+                          <button
+                            type="button"
+                            onClick={() => handleToggleOptionSpeak(originalIndex, option.text)}
+                            className="shrink-0 w-11 h-11 md:w-12 md:h-12 rounded-full border-2 border-teal-500 bg-white/70 text-teal-700 flex items-center justify-center shadow-sm hover:bg-teal-500 hover:text-white transition-colors"
+                            aria-label={
+                              isOptionSpeaking
+                                ? t.ariaStopOption
+                                : t.ariaPlayOption
+                            }
+                          >
+                            {isOptionSpeaking ? '⏹' : '🔊'}
+                          </button>
+                        )}
+                      </div>
+                    );
+                  });
+                })()}
               </div>
 
               {showFeedback && selectedOption !== null && (
