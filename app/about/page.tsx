@@ -42,16 +42,29 @@ export default function AboutPage() {
             Vaša symbolická 'káva' mi pomôže pokryť náklady na web a dodá mi energiu do tvorby ďalších užitočných scenárov. Ďakujem, otec Martin ❤️
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            {/* Revolut tlačidlo */}
-            <a 
-              href="https://revolut.me/safestory" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="w-full sm:w-auto bg-black hover:bg-gray-800 text-white font-bold py-3 px-8 rounded-full transition-transform hover:-translate-y-1 shadow-md flex items-center justify-center gap-2"
-            >
-              <span>Podporiť cez Revolut ☕</span>
-            </a>
+          <div className="flex flex-col gap-4 justify-center items-center">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              {/* Revolut tlačidlo */}
+              <a 
+                href="https://revolut.me/safestory" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="w-full sm:w-auto bg-black hover:bg-gray-800 text-white font-bold py-3 px-8 rounded-full transition-transform hover:-translate-y-1 shadow-md flex items-center justify-center gap-2"
+              >
+                <span>Podporiť cez Revolut ☕</span>
+              </a>
+            </div>
+            <p className="text-slate-600 text-sm">
+              Alebo ma môžete podporiť kávou na{' '}
+              <a 
+                href="https://ko-fi.com/safestory" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-teal-600 hover:text-teal-800 font-semibold underline underline-offset-2"
+              >
+                Ko-fi
+              </a>
+            </p>
           </div>
         </div>
 
