@@ -51,8 +51,8 @@ export default function Home() {
       </div>
 
       {/* Jemný copyright / kontakt dole */}
-      <div className="absolute inset-x-0 bottom-3 px-4 z-10">
-        <p className="text-[11px] md:text-xs text-slate-700/80 text-center backdrop-blur-[2px] bg-white/40 rounded-full px-4 py-1 inline-block mx-auto shadow-sm">
+      <div className="absolute inset-x-0 bottom-3 px-4 z-10 flex justify-center">
+        <p className="text-[11px] md:text-xs text-slate-700/80 text-center backdrop-blur-[2px] bg-white/40 rounded-full px-4 py-1 shadow-sm max-w-3xl">
           © 2026 SafeStory.eu. Všetky práva vyhradené. Projekt SafeStory, ilustrácie postáv (Sofia a
           Olivia) a príbehy sú autorským dielom.{' '}
           <span className="whitespace-nowrap">Kontakt: safestoryeu@gmail.com</span>
