@@ -245,5 +245,24 @@
         "feedback": "Excellent! That's the right choice. You must never run onto the road for a toy. An adult knows how to safely retrieve the ball, or they will just get you a new one."
       }
     ]
+  },
+  {
+    "id": 14,
+    "topic": "Dangerous Objects",
+    "title": "Lighter on the Table",
+    "image": "/images/scenarios/scenario_14_lighter.webp",
+    "text": "Olivia is at home and sees a small, shiny lighter lying on the living room table, left there by an adult. It has a nice color and an interesting button. Trying to see if a little flame appears looks like a lot of fun. What should she do?",
+    "options": [
+      {
+        "text": "Try pressing the button just once to see how it works and put it out right away.",
+        "isCorrect": false,
+        "feedback": "Watch out! Fire is not a toy. The flame from a lighter is hot and can instantly set something on fire. Children must never play with lighters."
+      },
+      {
+        "text": "Do not touch the lighter at all, leave it on the table, and immediately call an adult.",
+        "isCorrect": true,
+        "feedback": "Correct! Lighters belong only in the hands of adults. Great job not trying it yourself and calling for help right away."
+      }
+    ]
   }
 ]

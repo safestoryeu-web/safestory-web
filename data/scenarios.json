@@ -245,5 +245,24 @@
         "feedback": "Výborne! Správne rozhodnutie. Pre hračku na cestu nikdy nesmieš vybehnúť. Dospelý vie, ako bezpečne loptu zobrať, alebo ti radšej kúpi novú."
       }
     ]
+  },
+  {
+    "id": 14,
+    "topic": "Nebezpečné predmety",
+    "title": "Zapaľovač na stole",
+    "image": "/images/scenarios/scenario_14_lighter.webp",
+    "text": "Olívia je doma a na stole v obývačke uvidí položený malý lesklý zapaľovač, ktorý tam zabudol niekto dospelý. Má peknú farbu a zaujímavé tlačidlo. Vyskúšať, či sa objaví malý plamienok, vyzerá ako veľká zábava. Čo by mala urobiť?",
+    "options": [
+      {
+        "text": "Skúsiť len raz stlačiť tlačidlo, aby videla, ako funguje, a hneď ho zhasnúť.",
+        "isCorrect": false,
+        "feedback": "Pozor! Oheň nie je hračka. Plameň zo zapaľovača je horúci a môže okamžite niečo zapáliť. Deti sa so zapaľovačmi nikdy nesmú hrať."
+      },
+      {
+        "text": "Zapaľovača sa vôbec nedotýkať, nechať ho na stole a okamžite zavolať dospelého.",
+        "isCorrect": true,
+        "feedback": "Správne! Zapaľovače patria len do rúk dospelým. Výborne, že si to neskúšala sama a hneď si zavolala pomoc."
+      }
+    ]
   }
 ]
