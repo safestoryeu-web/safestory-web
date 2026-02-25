@@ -302,5 +302,24 @@
         "feedback": "Výborne! Správne vieš, že k horúcemu sporáku a hrncom chodia len dospelí. Dobre, že si neriskovala popálenie a zavolala si pomoc."
       }
     ]
+  },
+  {
+    "id": 17,
+    "topic": "Bezpečnosť doma",
+    "title": "Otvorené okno",
+    "image": "/images/scenarios/scenario_17_window.webp",
+    "text": "Sofia a Olívia sa hrajú v izbe. Okno je dokorán otvorené, aby dnu išiel čerstvý vzduch. Zrazu z vonku začujú veľmi zaujímavý zvuk, akoby hrala hudba alebo išiel sprievod. Chceli by vidieť, čo sa tam deje, ale cez vysoký parapet dobre nevidia. Čo by mali urobiť?",
+    "options": [
+      {
+        "text": "Prisunúť si k oknu stoličku alebo krabicu, postaviť sa na ňu a spoločne sa vykloniť, aby lepšie videli.",
+        "isCorrect": false,
+        "feedback": "Pozor! Toto je obrovské nebezpečenstvo. Z otvoreného okna alebo balkóna sa nikdy nesmiete vykláňať. Mohli by ste stratiť rovnováhu a spadnúť dole."
+      },
+      {
+        "text": "Zostať bezpečne v izbe na zemi a zavolať rodičov, aby ich k oknu zobrali na ruky.",
+        "isCorrect": true,
+        "feedback": "Správne! K otvorenému oknu sa nikdy nepribližujeme tak blízko, aby sme z neho mohli vypadnúť. Výborne, že ste zavolali dospelého."
+      }
+    ]
   }
 ]

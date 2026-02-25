@@ -302,5 +302,24 @@
         "feedback": "Excellent! You know correctly that only adults go near a hot stove and pots. Good job not risking getting burned and calling for help."
       }
     ]
+  },
+  {
+    "id": 17,
+    "topic": "Home Safety",
+    "title": "The Open Window",
+    "image": "/images/scenarios/scenario_17_window.webp",
+    "text": "Sofia and Olivia are playing in their room. The window is wide open to let in some fresh air. Suddenly, they hear a very interesting sound from outside, like music playing or a parade. They want to see what is happening, but they can't see well over the high windowsill. What should they do?",
+    "options": [
+      {
+        "text": "Push a chair or a box to the window, stand on it, and lean out together to see better.",
+        "isCorrect": false,
+        "feedback": "Watch out! This is extremely dangerous. You must never lean out of an open window or over a balcony. You could both lose your balance and fall down."
+      },
+      {
+        "text": "Stay safely in the room on the floor and call their parents to pick them up to look out.",
+        "isCorrect": true,
+        "feedback": "Correct! We never get so close to an open window that we could fall out. Great job calling an adult to help you look safely."
+      }
+    ]
   }
 ]
