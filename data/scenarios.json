@@ -283,5 +283,24 @@
         "feedback": "Výborne! Správne ste uhádli, že to nie sú cukríky. Čistiace prostriedky chytajú len dospelí, keď idú prať oblečenie."
       }
     ]
+  },
+  {
+    "id": 16,
+    "topic": "Bezpečnosť v kuchyni",
+    "title": "Horúci hrniec",
+    "image": "/images/scenarios/scenario_16_stove.webp",
+    "text": "Sofia je v kuchyni a cíti, že sa tam varí niečo voňavé. Na sporáku stojí veľký hrniec, z ktorého sa parí, a jeho dlhá rúčka trčí smerom do priestoru. Sofia je veľmi zvedavá, čo sa varí, ale dobre tam nedočiahne. Čo by mala urobiť?",
+    "options": [
+      {
+        "text": "Postaviť sa na špičky, chytiť hrniec za rúčku a pritiahnuť si ho bližšie, aby nakukla dnu.",
+        "isCorrect": false,
+        "feedback": "Pozor! Toto je veľmi nebezpečné. Hrniec je horúci a je v ňom vriace jedlo. Keby si ho na seba prevrhla, mohla by si sa vážne popáliť. Sporáka sa nikdy nedotýkaj."
+      },
+      {
+        "text": "Odstúpiť ďalej od sporáka a zavolať dospelého, aby jej bezpečne ukázal, čo sa varí.",
+        "isCorrect": true,
+        "feedback": "Výborne! Správne vieš, že k horúcemu sporáku a hrncom chodia len dospelí. Dobre, že si neriskovala popálenie a zavolala si pomoc."
+      }
+    ]
   }
 ]

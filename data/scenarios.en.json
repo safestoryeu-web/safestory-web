@@ -283,5 +283,24 @@
         "feedback": "Excellent! You guessed correctly that these are not candies. Cleaning products are only handled by adults when they do the laundry."
       }
     ]
+  },
+  {
+    "id": 16,
+    "topic": "Kitchen Safety",
+    "title": "The Hot Pot",
+    "image": "/images/scenarios/scenario_16_stove.webp",
+    "text": "Sofia is in the kitchen and smells something delicious cooking. There is a big steaming pot on the stove, and its long handle is sticking out. Sofia is very curious about what is cooking, but she can't reach it well. What should she do?",
+    "options": [
+      {
+        "text": "Stand on her tiptoes, grab the pot by the handle, and pull it closer to take a peek inside.",
+        "isCorrect": false,
+        "feedback": "Watch out! This is very dangerous. The pot is hot and holds boiling food. If you pulled it down onto yourself, you could get seriously burned. Never touch the stove."
+      },
+      {
+        "text": "Step away from the stove and call an adult to safely show her what is cooking.",
+        "isCorrect": true,
+        "feedback": "Excellent! You know correctly that only adults go near a hot stove and pots. Good job not risking getting burned and calling for help."
+      }
+    ]
   }
 ]
